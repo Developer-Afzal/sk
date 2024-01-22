@@ -1,0 +1,204 @@
+:root{
+    --fs-xxl:28px;
+    --fs-xl:18px;
+    --fs-lg:16px;
+    --fs-m:14px;
+    --fs-sm:12px;
+    --yellow:#dd940b;
+    --lightYellow:#f1bb56;
+    --labelColor:rgb(169, 102, 8);
+    --WhiteColor:#ffffff;
+}
+
+@media(max-width:992px) {
+    :root{
+        --fs-xxl:20px;
+        --fs-xl:14px;
+        --fs-lg:10px;
+        --fs-m:8px;
+        --fs-sm:6px;
+    }
+
+}
+
+@media(max-width:576px) {
+    :root{
+        --fs-xxl:26px;
+        --fs-xl:14px;
+        --fs-lg:12px;
+        --fs-m:10px;
+        --fs-sm:6px;
+        .icons{
+            width:20px;
+            padding: 2px;
+        }
+    }  
+}
+
+
+*{
+    margin:0;
+    padding:0;
+}
+
+input{
+    outline: none;
+    width:98%;
+    height: 40px;
+    border-radius: 4px;
+    padding-left: 10px;
+}
+
+label{
+    display: flex !important;
+    color: var(--labelColor);
+}
+
+.logo-heading{
+    font-size: var(--fs-xxl);
+}
+
+.logo-heading .link{
+    text-decoration: none;
+    color: var(--WhiteColor);
+}
+
+table{
+    width: 100%;
+    
+}
+
+.table-block{
+    height: 300px;
+    margin-top: 40px;
+    background-color: #f499219b;
+
+}
+
+table thead{
+    background-color: #dd940b;
+    height: 40px;
+    color: var(--WhiteColor);
+}
+
+tbody tr{
+    border-bottom: 4px solid var(--WhiteColor);
+    border-top: 4px solid var(--WhiteColor);
+    height: 52px;
+    font-weight: 600;
+    font-size: var(--fs-m);
+}
+
+
+
+.default-btn{
+    padding: 3px 5px;
+    font-size: var(--fs-m);
+    min-width: 80px;
+    margin: 2px;
+    cursor: pointer;
+    background-color:var(--yellow);
+    color: var(--WhiteColor);
+    border: none;
+    border-radius: 4px;
+}
+
+.default-btn:hover{
+    background-color: #eda92b;
+}
+._flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.view-block{
+    flex-direction: column;
+}
+
+
+
+.header-block{
+    background-color: var(--yellow);
+    min-height: 50px;
+    color: var(--WhiteColor);
+    font-weight: 700;
+}
+
+.header-block img{
+    height: 35px;
+    cursor: pointer;
+}
+
+.header-input{
+    width: 90%;
+    border: none;
+    color: var(--yellow) ;
+}
+
+form input{
+    padding-left: 10px;
+    border: 1px solid #918a8a;
+    border-radius: 4px;
+}
+
+form select{
+    width:98%;
+    height: 40px;
+    cursor: pointer;
+    border: 1px solid #918a8a;
+    padding-left: 10px;
+    border-radius: 4px;
+}
+
+.icons{
+    width:30px;
+    padding:5px;
+    cursor: pointer;
+}
+
+/* dashboard Styling Starts here */
+.upperContent{
+    padding: 10px;
+}
+
+
+.dashboard-Card{
+    height: auto;
+    padding: 10px;
+    border-radius: 8px;
+    color: var(--yellow);
+    box-shadow: 0 3px 6px rgba(245, 179, 26, 0.472), 0 3px 6px rgba(239, 174, 52, 0.23);
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; */
+}
+
+.dashboard-Card > :first-child{
+    font-size: var(--fs-xxl);
+}
+
+.Dashboardreg-count{
+    box-shadow: 0 3px 6px rgba(245, 179, 26, 0.472), 0 3px 6px rgba(239, 174, 52, 0.23);
+    height: 150px;
+    width: 150px;
+    border-radius: 75px;
+    margin: 20px auto;
+    font-size: var(--fs-xxl);
+    font-weight: 900;
+}
+
+
+/*  Student List Styling Starts here   */
+
+.StudentList-Block{
+    min-height: calc(100vh - 100px);
+}
+
+/*  Footer Styling */
+
+.footer-Block{
+    height: 50px;
+    background: var(--yellow);
+    width: 100%;
+}
+
