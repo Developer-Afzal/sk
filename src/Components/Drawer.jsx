@@ -15,11 +15,12 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import menuIcon from '../Images/menu.png'
 import { useNavigate } from 'react-router-dom';
-
-
+import { GetLogout } from '../features/LoginSlice';
+import { useDispatch } from 'react-redux';
 export default function Drawer() {
   const [state, setState] = React.useState({left: false});
   const navigate = useNavigate() 
+  const dispath = useDispatch()
   const menuData = [
     {listName:'Dashboard', path:'/', Icon:<HomeIcon sx={{color:'White'}}/>},
     {listName:'Students List', path:'studentlist', Icon:<FormatListBulletedIcon sx={{color:'White'}}/> },
@@ -32,6 +33,11 @@ const GoPage = (value)=>{
   console.log('running');
   navigate(value)
 }
+
+const LogoutUser = () => {
+  dispath(GetLogout())
+}
+
 
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -55,8 +61,8 @@ const GoPage = (value)=>{
     >
       <List>
         {menuData.map((text, index) => (
-          <ListItem  disablePadding>
-            <ListItemButton onClick={()=>  GoPage(text.path) }>
+          <ListItem  disablePadding key={index}>
+            <ListItemButton  onClick={()=>  GoPage(text.path) }>
               <ListItemIcon>
                  {text.Icon}
               </ListItemIcon>
@@ -64,6 +70,7 @@ const GoPage = (value)=>{
             </ListItemButton>
           </ListItem>
         ))}
+        <ListItemButton className='text-center' onClick={()=> LogoutUser()}>Logout</ListItemButton>
       </List>
       <Divider />
      
@@ -73,7 +80,7 @@ const GoPage = (value)=>{
   return (
     <div>
         <React.Fragment>
-          <Button onClick={toggleDrawer('left', true)} p-0>
+          <Button onClick={toggleDrawer('left', true)} >
             <img src={menuIcon}/>
             </Button>
           <SwipeableDrawer 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col, Stack } from 'react-bootstrap'
-import Chart from '../Components/Chart'
+import Chart from '../Components/ChartComponent'
 const Dashboard = () => {
   return (
     <Container >
@@ -24,7 +24,6 @@ const Dashboard = () => {
         <Col sm={12}>
           <Stack gap={4} className='flex-sm-row'>
             <Col sm={8}>
-              Attendence Status
               <Chart/>
             </Col>
             <Col sm={4} className='border-2 dashboard-Card ms-2 text-center'>

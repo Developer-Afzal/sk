@@ -18,7 +18,6 @@
         --fs-m:8px;
         --fs-sm:6px;
     }
-
 }
 
 @media(max-width:576px) {
@@ -89,10 +88,16 @@ tbody tr{
     font-size: var(--fs-m);
 }
 
+thead tr th:first-child{
+    padding-left: 10px;
+}
 
+tbody tr td:first-child{
+    padding-left: 10px;
+}
 
 .default-btn{
-    padding: 3px 5px;
+    padding: 4px 6px;
     font-size: var(--fs-m);
     min-width: 80px;
     margin: 2px;
@@ -190,7 +195,7 @@ form select{
 
 /*  Student List Styling Starts here   */
 
-.StudentList-Block{
+.layout-Block{
     min-height: calc(100vh - 100px);
 }
 
@@ -202,3 +207,19 @@ form select{
     width: 100%;
 }
 
+
+/* login Page styling starts here */
+
+.login-block{
+    background: #ebb042;
+    min-height: calc(100vh - 100px);
+}
+
+.login-block input{
+    margin: 10px 5px;
+    color: var(--yellow);
+}
+
+.login-block p{
+    color: var(--WhiteColor);
+}
