@@ -30,7 +30,6 @@ export default function Drawer() {
 ]
 
 const GoPage = (value)=>{
-  console.log('running');
   navigate(value)
 }
 

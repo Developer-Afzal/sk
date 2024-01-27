@@ -29,7 +29,6 @@ const Login = () => {
 
   const handleSubmit = (e)=>{
     e.preventDefault()
-    console.log(userData);
     setuserData({
       email:'',
       password:''
@@ -37,7 +36,6 @@ const Login = () => {
 
     axios.post('https://reqres.in/api/login',userData)
     .then((res)=>{
-      console.log(res);
       Dispath(GetLogin(res?.data?.token))
       /* cookies for UTC Time   */
        document.cookie = `Token=${res?.data?.token}; expires=${new Date(Date.now() +  5000).toUTCString()}; path='/'`
@@ -49,7 +47,6 @@ const Login = () => {
       navigate('/')
     })
     .catch((error)=>{
-        console.log(error);
     })
   }
 

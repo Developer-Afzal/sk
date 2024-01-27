@@ -34,10 +34,9 @@ const StudentList = () => {
     const Dispatch = useDispatch();
     const navigate = useNavigate()
     const ElementRef = useRef(null)
-    console.log(Math.ceil(userData.length/5));
+    // console.log(Math.ceil(userData.length/5));
     const Added =()=>{
       if(Student === ''){
-        console.log('block exe');
         return
       }else{
         Dispatch(Insert(Student))
@@ -52,7 +51,6 @@ const StudentList = () => {
 
     const EditForm = (user)=>{
       setUserID(user.id)
-      console.log(user);
       setStudent({
         S_Name:user.S_Name,
         S_Fname:user.S_Fname,
@@ -71,7 +69,6 @@ const StudentList = () => {
     }
 
     const UpdateValue = ()=>{
-      console.log('running');
       let Student_Data = Student
       Student_Data['id'] = UserId
       Dispatch(Updation(Student_Data))
