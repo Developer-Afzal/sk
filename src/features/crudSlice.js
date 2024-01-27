@@ -16,7 +16,6 @@ const initialState = {
 export const FetchPost = createAsyncThunk('fetch/post', async () =>{
   try {
     const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    console.log(response)
   } catch (error) {
     return error.message;
   }
@@ -47,12 +46,11 @@ export const FetchPost = createAsyncThunk('fetch/post', async () =>{
         },
 
         Updation:(state, action)=>{
-          console.log(action.payload);
           const {id} = action.payload
           let INDEX = state.users.findIndex(itm=> {
            return itm.id === id
            })
-           console.log(INDEX);
+          //  console.log(INDEX);
            state.users[INDEX] = action.payload
            
         },
@@ -66,7 +64,6 @@ export const FetchPost = createAsyncThunk('fetch/post', async () =>{
         },
 
         Read:(state, action) => {
-          console.log(action.payload);
           state.ViewUser = action.payload
         }
 
@@ -74,7 +71,6 @@ export const FetchPost = createAsyncThunk('fetch/post', async () =>{
     },
     extraReducers:(builder)=>{
       builder.addCase(FetchPost.fulfilled, (state, action) =>{
-        console.log(action.payload)
       })
     }
   })

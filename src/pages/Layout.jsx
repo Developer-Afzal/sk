@@ -4,11 +4,10 @@ import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import Login from './Login'
 const Layout = (props) => {
-  console.log(props?.isAuth?.UserToken);
   return (
    <>
    <Header/>
-   <div className='layout-Block'>
+   <div className='layout-Block _flex'>
     {props?.isAuth?.UserToken ?  <Outlet/> : <Login/>}
    </div>
    <Footer/>

@@ -10,7 +10,6 @@ export const Login = createSlice ({
     initialState,
     reducers:{
         GetLogin:(state, action)=>{
-            console.log(action.payload);
             state.UserToken = action.payload
         },
 

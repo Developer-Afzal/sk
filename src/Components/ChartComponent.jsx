@@ -1,15 +1,7 @@
 import * as React from 'react';
 import { Chart } from "react-google-charts";
 
-export default function ChartComponent() {
-  const data = [
-    ["Student Attendance Status", "IX", "X", "XI", "XII"],
-    ["Jan", 56, 50, 20,45],
-    ["Dec", 70, 60, 25,54],
-    ["Nov", 60, 120, 80, 54],
-    ["Oct", 30, 54, 35, 54],
-  ];
-
+export default function ChartComponent(props) {
   // const options = {
   //   chart: {
   //     title: "Student Performance",
@@ -21,10 +13,11 @@ export default function ChartComponent() {
   return (
     <>
     <Chart
-      chartType="Bar"
+      chartType={props.chartType}
       width="100%"
       height="300px"
-      data={data}
+      data={props.data}
+      options={props.dataoption}
     />
     </>
     // <BarChart
