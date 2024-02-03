@@ -7,7 +7,7 @@ const Layout = (props) => {
   return (
    <>
    <Header/>
-   <div className='layout-Block _flex'>
+   <div className='layout-Block _flex flex-column'>
     {props?.isAuth?.UserToken ?  <Outlet/> : <Login/>}
    </div>
    <Footer/>

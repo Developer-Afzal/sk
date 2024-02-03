@@ -10,6 +10,39 @@
     --WhiteColor:#ffffff;
 }
 
+*{
+    margin:0;
+    padding:0;
+}
+
+.default-btn{
+    padding: 4px 6px;
+    font-size: var(--fs-m);
+    min-width: 80px;
+    margin: 2px;
+    cursor: pointer;
+    background-color:var(--yellow);
+    color: var(--WhiteColor);
+    border: none;
+    border-radius: 4px;
+}
+
+.default-btn:hover{
+    background-color: #eda92b;
+}
+._flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.heading{
+    font-size: var(--fs-xxl);
+    font-weight: 700;
+    color: var(--yellow);
+}
+
 @media(max-width:992px) {
     :root{
         --fs-xxl:20px;
@@ -35,10 +68,7 @@
 }
 
 
-*{
-    margin:0;
-    padding:0;
-}
+
 
 input{
     outline: none;
@@ -96,27 +126,6 @@ tbody tr td:first-child{
     padding-left: 10px;
 }
 
-.default-btn{
-    padding: 4px 6px;
-    font-size: var(--fs-m);
-    min-width: 80px;
-    margin: 2px;
-    cursor: pointer;
-    background-color:var(--yellow);
-    color: var(--WhiteColor);
-    border: none;
-    border-radius: 4px;
-}
-
-.default-btn:hover{
-    background-color: #eda92b;
-}
-._flex{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
 
 .view-block{
     flex-direction: column;
@@ -223,3 +232,19 @@ form select{
 .login-block p{
     color: var(--WhiteColor);
 }
+
+
+/* View Page Styling  */
+
+.view-block{
+    padding: 10px, 0;
+    min-height: calc(100vh - 100px);
+    align-items: center;
+}
+.view-block .view-heading{
+    font-size: var(--fs-xxl);
+    font-weight: 700;
+    padding: 40px 0;
+    color: var(--yellow);
+}
+
