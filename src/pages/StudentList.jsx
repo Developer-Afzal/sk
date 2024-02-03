@@ -14,19 +14,6 @@ import {useForm} from 'react-hook-form'
 const StudentList = () => {
     const form = useForm();
     const {register, handleSubmit, reset, setValue} = form;
-    const [Student, setStudent] = useState({
-      S_Name:'',
-      S_Fname:'',
-      S_Mname:'',
-      Address:'',
-      Pincode:'',
-      Coaching_Time:'',
-      P_Contact:'',
-      DOB:'',
-      S_Class:'',
-      S_Board:'',
-      Fee:'',
-    })
     const [isEdit, SetEdit] = useState(false);
     const [UserId, setUserID] = useState('');
     const [ShowForm, setShowForm] = useState(false);
@@ -73,15 +60,6 @@ const StudentList = () => {
       setValue('Fee', user?.Fee);
       SetEdit(true); 
       setShowForm(true);
-    }
-
-    const UpdateValue = ()=>{
-      let Student_Data = Student
-      Student_Data['id'] = UserId
-      Dispatch(Updation(Student_Data))
-      SetEdit(false)
-      setUserID('')
-      setShowForm(false)
     }
 
     const Deletionvalue = (User) =>{
