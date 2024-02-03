@@ -208,6 +208,13 @@ form select{
     min-height: calc(100vh - 100px);
 }
 
+.errorStyle{
+    color:rgb(237, 6, 6);
+    font-Size:var(--fs-sm);
+    font-weight: 600;
+
+}
+
 /*  Footer Styling */
 
 .footer-Block{
