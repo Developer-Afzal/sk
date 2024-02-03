@@ -10,7 +10,7 @@ const Header = () => {
              <Drawer/>
             </Col>
             <Col xs={10} sm={4}  className='_flex logo-heading'>
-               <Link to="/" className='link'>S K Coaching Center</Link> 
+               <Link to="/sk" className='link'>S K Coaching Center</Link> 
             </Col>
             <Col sm={5} className='_flex d-none d-sm-flex'>
               <input placeholder='Search Student' className='header-input'/>

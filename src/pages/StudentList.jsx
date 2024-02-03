@@ -71,7 +71,7 @@ const StudentList = () => {
 
     const ViewUser = (itm)=>{
       Dispatch(Read(itm))
-      navigate('/view')
+      navigate('view')
     }
 
 
@@ -123,10 +123,10 @@ const StudentList = () => {
             <thead>
                 <tr>
                   <th>Student</th>
-                  <th>DOB</th>
+                  <th className='text-center'>DOB</th>
                   <th className='text-center'>Class</th>
                   <th className='text-center'>Board</th>
-                  <th>Address</th>
+                  <th className='text-center'>Address</th>
                   <th className='text-center'>Fee</th>
                   <th className='text-center'>Action</th>
                 </tr>
@@ -135,10 +135,10 @@ const StudentList = () => {
             {userData.slice(Startpage,EndPage).map((itm)=>
                 <tr key={itm.id}>
                   <td>{itm.S_Name}</td>
-                  <td>{itm.Date_of_Birth}</td>
+                  <td className='text-center'>{itm.Date_of_Birth}</td>
                   <td className='text-center'>{itm.S_Class}</td>
                   <td className='text-center'>{itm.S_Board}</td>
-                  <td>{itm.Address}</td>
+                  <td className='text-center'>{itm.Address}</td>
                   <td className='text-center'>{itm.Fee}</td>
                   <td className='text-center'>
                      <img className='icons' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
