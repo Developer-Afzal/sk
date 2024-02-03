@@ -18,14 +18,14 @@ const AppRouting = () => {
    <>
    <BrowserRouter>
       <Routes>
-          <Route path='/' element={<Layout isAuth={User_Auth}/>}>
+          <Route path='sk' element={<Layout isAuth={User_Auth}/>}>
           <Route index element={<Dashboard/>}/>
-          <Route path="/studentlist" element={<StudentList/>}/>
-          <Route path="/view" element={<ViewUser/>}/>
-          <Route path="/exam" element={<Exam/>}/>
-          <Route path="/importantDate" element={<ImportantDate/>}/>
-          <Route path="/feestatus" element={<Feestatus/>}/>
-          <Route path="/reduxAsyncthunk" element={<AsyncThunkEx/>}/>
+          <Route path="studentlist" element={<StudentList/>}/>
+          <Route path="view" element={<ViewUser/>}/>
+          <Route path="exam" element={<Exam/>}/>
+          <Route path="importantDate" element={<ImportantDate/>}/>
+          <Route path="feestatus" element={<Feestatus/>}/>
+          <Route path="reduxAsyncthunk" element={<AsyncThunkEx/>}/>
           </Route>  
           {User_Auth ? <Route path="/" element={<Login/>}/> : ''}   
       </Routes>
