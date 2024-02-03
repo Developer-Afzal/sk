@@ -4,11 +4,11 @@ import axios from 'axios'
 
 const initialState = {
     users:[
-      {id:68124,S_Name:'Afzal Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'223242', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2024-12-23', Board:'CBSE', S_Class:'X', Fee:'1500'},
-      {id:87891,S_Name:'Asad Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'786723', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2024-12-23', Board:'CBSE', S_Class:'X', Fee:'1500'},
-      {id:29998,S_Name:'Ahid Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'878893', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2024-12-23', Board:'CBSE', S_Class:'X', Fee:'1500'},
-      {id:89789,S_Name:'Rahul Singh', S_Fname:'Vijay Singh', S_Mname:'Neelam Singh', Address:'nehru Place, Delhi',Pincode:'908978', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2024-12-23', Board:'CBSE', S_Class:'X', Fee:'1500'},
-      {id:98989,S_Name:'Afzal Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'098776', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2024-12-23', Board:'CBSE', S_Class:'X', Fee:'1500'},
+      {id:68124,S_Name:'Afzal Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'223242', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2024-12-23', S_Board:'CBSE', S_Class:'X', Fee:'1500'},
+      {id:87891,S_Name:'Asad Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'786723', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2024-12-23', S_Board:'CBSE', S_Class:'X', Fee:'1500'},
+      {id:29998,S_Name:'Ahid Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'878893', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2024-12-23', S_Board:'CBSE', S_Class:'X', Fee:'1500'},
+      {id:89789,S_Name:'Rahul Singh', S_Fname:'Vijay Singh', S_Mname:'Neelam Singh', Address:'nehru Place, Delhi',Pincode:'908978', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2024-12-23', S_Board:'CBSE', S_Class:'X', Fee:'1500'},
+      {id:98989,S_Name:'Afzal Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'098776', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2024-12-23', S_Board:'CBSE', S_Class:'X', Fee:'1500'},
     ],
     ViewUser:[]
   }
@@ -36,7 +36,7 @@ export const FetchPost = createAsyncThunk('fetch/post', async () =>{
               Coaching_Time:action.payload.Coaching_Time,
               P_Contact:action.payload.P_Contact,
               Date_of_Birth:action.payload.Date_of_Birth,
-              Board:action.payload.S_Board,
+              S_Board:action.payload.S_Board,
               S_Class:action.payload.S_Class,
               Fee:action.payload.Fee,
 
@@ -47,6 +47,8 @@ export const FetchPost = createAsyncThunk('fetch/post', async () =>{
 
         Updation:(state, action)=>{
           const {id} = action.payload
+          // console.log('slice call', id);
+
           let INDEX = state.users.findIndex(itm=> {
            return itm.id === id
            })

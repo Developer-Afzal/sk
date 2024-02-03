@@ -35,16 +35,16 @@ const addmissionOption ={
         <Col sm={12} className='upperContent'>
           <Stack gap={3} className='flex-sm-row'>
               <Col sm={4} xs={12}  className='border-2 dashboard-Card'>
-                <b>Monthly Fees $</b>
+                <b>Monthly Revenue $</b>
                 <Col className='_flex justify-content-between m-0'><b className='m-0'>24144 $ </b><button className='default-btn'>Check Now</button></Col> 
               </Col>
               <Col sm={4} xs={12} className='border-2 dashboard-Card '>
                <b> Annual Revenue $</b>
-               <Col className='_flex justify-content-between m-0'><b className='m-0'>24144 $ </b><button className='default-btn'>Check Now</button></Col> 
+               <Col className='_flex justify-content-between m-0'><b className='m-0'>2434344 $ </b><button className='default-btn'>Check Now</button></Col> 
                 </Col>
               <Col sm={4} xs={12} className='border-2 dashboard-Card'>
                 <b>Number of Student</b>
-                <Col className='_flex justify-content-between m-0'><b className='m-0'>2284289572893 </b><button className='default-btn'>Check Now</button></Col>
+                <Col className='_flex justify-content-between m-0'><b className='m-0'>7289 </b><button className='default-btn'>Check Now</button></Col>
               </Col>
           </Stack>
         </Col>
