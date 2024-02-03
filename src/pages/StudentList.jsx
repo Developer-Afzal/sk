@@ -172,7 +172,7 @@ const StudentList = () => {
               <Col sm={4} className="p-1"><label>Coaching Fees</label><input placeholder='Fees'  {...register('Fee',{required:{value:true, message:'Please enter Fees Amt'}} )} name="Fee"/><p className='p-0 m-0 errorStyle'>{errors.Coaching_Time?.message}</p></Col>
               {/* <Col sm={4} className="p-1"><label>Subjects</label><select><option selected>Select Sujects </option><option>Hindi</option><option>English</option><option>Math</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>Science</option><option>Commerce</option><option>Arts Stream</option></select></Col> */}
               <Col sm={12} className='p-0'><button type='submit' onClick={handleSubmit(handleForm) } className='default-btn'>ADD</button>
-              <button className='default-btn' type='reset' onClick={()=> { navigate('/studentlist'); setShowForm(false); reset()  } }>Cancel</button></Col>
+              <button className='default-btn' type='reset' onClick={()=> {  setShowForm(false); reset()  } }>Cancel</button></Col>
             </Row>
            </Container>
           </form>

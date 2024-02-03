@@ -23,7 +23,7 @@ export default function Drawer() {
   const navigate = useNavigate() 
   const dispath = useDispatch()
   const menuData = [
-    {listName:'Dashboard', path:'/', Icon:<HomeIcon sx={{color:'White'}}/>},
+    {listName:'Dashboard', path:'/sk', Icon:<HomeIcon sx={{color:'White'}}/>},
     {listName:'Students List', path:'studentlist', Icon:<FormatListBulletedIcon sx={{color:'White'}}/> },
     {listName:'Fee Status', path:'feestatus', Icon:<CurrencyRupeeIcon sx={{color:'White'}}/> },
     {listName:'Important Dates', path:'importantDate', Icon:<CalendarMonthIcon sx={{color:'White'}}/>},

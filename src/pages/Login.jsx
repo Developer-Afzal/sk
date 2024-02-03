@@ -44,7 +44,7 @@ const Login = () => {
       // const indianExpirationString = expirationDate.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
       // document.cookie = `AuthToken=${res?.data?.token}; expires=${indianExpirationString}; path='/'` 
       // console.log(expirationDate);
-      navigate('/')
+      navigate('/sk')
     })
     .catch((error)=>{
     })
