@@ -55,8 +55,7 @@ const Login = () => {
   return (
    <Container fluid>
     <Row className='login-block' gap={4}>
-      <Col sm={7}></Col>
-      <Col sm={5} className='_flex'>
+      <Col sm={{span:5, offset:7}} className='_flex'>
         <form onSubmit={handleSubmit}>
         <p className='text-center fw-bolder fs-1'>Login Page</p>
         <input placeholder='Enter user name' name='email' value={userData?.email} onChange={handlechange}/>

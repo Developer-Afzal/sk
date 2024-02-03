@@ -108,6 +108,7 @@ table thead{
     background-color: #dd940b;
     height: 40px;
     color: var(--WhiteColor);
+    font-size: var(--fs-lg);
 }
 
 tbody tr{
@@ -205,7 +206,7 @@ form select{
 /*  Student List Styling Starts here   */
 
 .layout-Block{
-    min-height: calc(100vh - 100px);
+    min-height: calc(100svh - 100px);
 }
 
 .errorStyle{
