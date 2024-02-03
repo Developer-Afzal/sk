@@ -16,9 +16,10 @@ import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import menuIcon from '../Images/menu.png'
 import { useNavigate } from 'react-router-dom';
 import { GetLogout } from '../features/LoginSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 export default function Drawer() {
   const [state, setState] = React.useState({left: false});
+  const auth = useSelector(state => state.Auth?.UserToken)
   const navigate = useNavigate() 
   const dispath = useDispatch()
   const menuData = [
@@ -79,7 +80,7 @@ const LogoutUser = () => {
   return (
     <div>
         <React.Fragment>
-          <Button onClick={toggleDrawer('left', true)} >
+          <Button onClick={auth !== null ? toggleDrawer('left', true) : null} >
             <img src={menuIcon}/>
             </Button>
           <SwipeableDrawer 
