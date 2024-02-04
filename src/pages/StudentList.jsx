@@ -119,12 +119,18 @@ const StudentList = () => {
     }
   }
 
+  const Expandmenu = (e, value)=>{
+    e.stopPropagation();
+    setUserID(value)
+    setpopOver(true); 
+  }
+
 // const GoAsynchPage = ()=>{
 //   navigate('/reduxAsyncthunk')
 // }
 
   return (
-    <Container fluid className='m-0 p-0'>
+    <Container fluid className='m-0 p-0' onClick={()=> setpopOver(false)}>
           <Stack className='_flex pt-2 px-2' direction='row' justifyContent="space-between" >
           <h4 className='heading'>{ShowForm ? 'ADD NEW STUDENT' : 'Student List'}</h4>
           <button className='default-btn  px-2 me-2' onClick={()=> {setShowForm(!ShowForm); SetEdit(false); reset() }}>{!ShowForm ? 'ADD Student' : 'Back'}</button>
@@ -154,14 +160,14 @@ const StudentList = () => {
                   <td className='text-center'>{itm.Fee}</td>
                   <td className='text-center position-relative'>
                   <div className='popover d-sm-none _flex'>
-                    <div className='icons-block'>
+                    <div className={popOver && UserId === itm.id ? 'popoverOpen' : 'icons-block'}>
                     <img className='icons' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
                     <img className='icons' src={ViewIcon} onClick={()=>ViewUser(itm)} alt="View"/>
                     <img className='icons' src={DeleteIcon} onClick={()=> Deletionvalue(itm?.id)} alt="delete"/>
                     </div>
-                    <spna className="info">
-                      <img className='icons' src={moreIcon}/>
-                    </spna>
+                    <span className={popOver && UserId == itm.id ? 'd-none' :  "info" }>
+                      <img className='icons' src={moreIcon} onClick={(e)=> Expandmenu(e,itm.id)}/>
+                    </span>
                   </div>
                       <img className='icons d-none d-sm-inline' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
                       <img className='icons d-none d-sm-inline' src={ViewIcon} onClick={()=>ViewUser(itm)} alt="View"/> 
