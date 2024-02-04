@@ -61,7 +61,16 @@
         --fs-m:10px;
         --fs-sm:6px;
         .icons{
-            width:20px;
+            width:25px;
+            padding: 2px;
+        }
+        .icons-block{
+    display: none;
+            }
+
+
+        .more-icons{
+            width:25px;
             padding: 2px;
         }
     }  
@@ -217,9 +226,29 @@ form select{
 
 .popover{
     position: absolute;
+    z-index: 10;
     top: 13px;
     right: 5px;
-    width: 80px;
+    width: 40px;
+    height: 20px;
+    border: none !important;
+    background-color: transparent !important;
+    transition: width 1s;
+   
+}
+
+.popover:hover{
+    width: 100px;
+   .icons-block{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    background-color: var(--WhiteColor);
+    border-radius: 4px;
+   }
+   .info{
+    display: none;
+   }
 }
 
 /*  Footer Styling */
