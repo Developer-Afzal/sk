@@ -8,6 +8,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import ViewIcon from '../Images/view.png'
 import EditIcon from '../Images/edit.png'
+import moreIcon from '../Images/moreIcon.png'
 import {useForm} from 'react-hook-form'
 
 
@@ -16,6 +17,7 @@ const StudentList = () => {
     const {register, handleSubmit, reset, setValue, formState:{errors}} = form;
     const [isEdit, SetEdit] = useState(false);
     const [UserId, setUserID] = useState('');
+    const [popOver, setpopOver] = useState(false);
     const [ShowForm, setShowForm] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage_Records, setperPage_Records] = useState(5)
@@ -26,8 +28,6 @@ const StudentList = () => {
     const navigate = useNavigate()
     const ElementRef = useRef(null)
     // console.log(Math.ceil(userData.length/5));
-
-
 
     const Added = (values)=>{
       if(isEdit){
@@ -42,9 +42,7 @@ const StudentList = () => {
         setEndPage(5)
         setCurrentPage(1) 
         reset() 
-        navigate('/studentlist')
-    }
-
+    } 
     const EditForm = (user)=>{
       setUserID(user.id)
       setValue('S_Name', user?.S_Name);
@@ -107,6 +105,18 @@ const StudentList = () => {
     }
   }
 
+
+  const openActionlist = (value)=>{
+    setUserID(value)
+  }
+
+  const handlechanges =(e)=>{
+
+    if (!/^\d$/.test (e.key) && e.key !== 'Backspace'){
+      e.preventDefault();
+    }
+  }
+
 // const GoAsynchPage = ()=>{
 //   navigate('/reduxAsyncthunk')
 // }
@@ -140,10 +150,15 @@ const StudentList = () => {
                   <td className='text-center'>{itm.S_Board}</td>
                   <td className='text-center'>{itm.Address}</td>
                   <td className='text-center'>{itm.Fee}</td>
-                  <td className='text-center'>
-                     <img className='icons' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
-                      <img className='icons' src={ViewIcon} onClick={()=>ViewUser(itm)} alt="View"/> 
-                      <img className='icons' src={DeleteIcon} onClick={()=> Deletionvalue(itm?.id)} alt="delete"/>
+                  <td className='text-center position-relative'>
+                 {UserId == itm.id ? <Stack className='popover d-sm-none rounded-1' direction="row" spacing={1}>
+                    <img className='icons ms-1' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
+                    <img className='icons' src={ViewIcon} onClick={()=>ViewUser(itm)} alt="View"/>
+                    <img className='icons' src={DeleteIcon} onClick={()=> Deletionvalue(itm?.id)} alt="delete"/>
+                      </Stack>  : <img className='icons d-sm-none' src={moreIcon} onClick={()=> openActionlist(itm.id)}/>  } 
+                      <img className='icons d-none d-sm-inline' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
+                      <img className='icons d-none d-sm-inline' src={ViewIcon} onClick={()=>ViewUser(itm)} alt="View"/> 
+                      <img className='icons d-none d-sm-inline' src={DeleteIcon} onClick={()=> Deletionvalue(itm?.id)} alt="delete"/>
                   </td>  
                 </tr>
                 )}
@@ -159,17 +174,17 @@ const StudentList = () => {
           <form>
            <Container>
            <Row className='text-start'>
-              <Col sm={4} className="p-1"><label>Student Name</label><input placeholder='Enter Student Name' name="S_Name" {...register('S_Name' ,{required:{value:true, message:'Please enter Name'}} ) } /><p className='p-0 m-0 errorStyle'>{errors.S_Name?.message}</p></Col>
-              <Col sm={4} className="p-1"><label>Student's Father Name</label><input placeholder="Enter Student's Father Name"  {...register('S_Fname' ,{required:{value:true, message:"Please enter Father's Name"}} )} name="S_Fname"/><p className='p-0 m-0 errorStyle'>{errors.S_Fname?.message}</p></Col>
-              <Col sm={4} className="p-1"><label>Student's Mother Name</label><input placeholder="Enter Student's mother Name "  {...register('S_Mname' ,{required:{value:true, message:"Please enter Mother's Name"}} )} name="S_Mname"/><p className='p-0 m-0 errorStyle'>{errors.S_Mname?.message}</p></Col>
-              <Col sm={4} className="p-1"><label>Address</label><input placeholder='Enter Student Address'  {...register('Address',{required:{value:true, message:'Please enter Address'}} )} name="Address"/><p className='p-0 m-0 errorStyle'>{errors.Address?.message}</p></Col>
-              <Col sm={4} className="p-1"><label>Pincode</label><input placeholder='Enter Pincode' {...register('Pincode',{required:{value:true, message:'Please enter Pincode'}} )}  name="Pincode"/><p className='p-0 m-0 errorStyle'>{errors.Pincode?.message}</p></Col>
+              <Col sm={4} className="p-1"><label>Student Name</label><input placeholder='Enter Student Name' name="S_Name" {...register('S_Name' ,{required:{value:true, message:'Please enter Name'}} ) }  autoComplete='off'/><p className='p-0 m-0 errorStyle'>{errors.S_Name?.message}</p></Col>
+              <Col sm={4} className="p-1"><label>Student's Father Name</label><input placeholder="Enter Student's Father Name"  {...register('S_Fname' ,{required:{value:true, message:"Please enter Father's Name"}} )} name="S_Fname" autoComplete='off'/><p className='p-0 m-0 errorStyle'>{errors.S_Fname?.message}</p></Col>
+              <Col sm={4} className="p-1"><label>Student's Mother Name</label><input placeholder="Enter Student's mother Name "  {...register('S_Mname' ,{required:{value:true, message:"Please enter Mother's Name"}} )} name="S_Mname" autoComplete='off'/><p className='p-0 m-0 errorStyle'>{errors.S_Mname?.message}</p></Col>
+              <Col sm={4} className="p-1"><label>Address</label><input placeholder='Enter Student Address'  {...register('Address',{required:{value:true, message:'Please enter Address'}} )} name="Address" autoComplete='off'/><p className='p-0 m-0 errorStyle'>{errors.Address?.message}</p></Col>
+              <Col sm={4} className="p-1"><label>Pincode</label><input placeholder='Enter Pincode' {...register('Pincode',{required:{value:true, message:'Please enter Pincode'}} )}  name="Pincode" onKeyDown={handlechanges} autoComplete='off'/><p className='p-0 m-0 errorStyle'>{errors.Pincode?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Coaching Time</label><input placeholder='Coaching Time'  {...register('Coaching_Time',{required:{value:true, message:'Please enter Coaching Time'}} )}  name="Coaching_Time"/><p className='p-0 m-0 errorStyle'>{errors.Coaching_Time?.message}</p></Col>
-              <Col sm={4} className="p-1"><label>Parent's Contact Number</label><input placeholder="Parent's Contact Number" {...register('P_Contact',{required:{value:true, message:'Please enter Contact'}} )}  name="P_Contact"/><p className='p-0 m-0 errorStyle'>{errors.P_Contact?.message}</p></Col>
-              <Col sm={4} className="p-1"><label>Date of Birth</label><input type='date' placeholder="Date of Birth"  {...register('Date_of_Birth',{required:{value:true, message:'Please enter DOB'}} )} name="Date_of_Birth"/><p className='p-0 m-0 errorStyle'>{errors.Date_of_Birth?.message}</p></Col>
+              <Col sm={4} className="p-1"><label>Parent's Contact Number</label><input placeholder="Parent's Contact Number" {...register('P_Contact',{required:{value:true, message:'Please enter Contact'}} )}  name="P_Contact" onKeyDown={handlechanges} autoCapitalize='off'/><p className='p-0 m-0 errorStyle'>{errors.P_Contact?.message}</p></Col>
+              <Col sm={4} className="p-1"><label>Date of Birth</label><input type='text'  placeholder="dd/mm/yyyy"  onFocus={(e)=> { e.currentTarget.type = "date"; e.currentTarget.focus();}}  {...register('Date_of_Birth',{required:{value:true, message:'Please enter DOB'}} )} name="Date_of_Birth"/><p className='p-0 m-0 errorStyle'>{errors.Date_of_Birth?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Student Class</label><input placeholder="Enter Student Class"  {...register('S_Class',{required:{value:true, message:'Please enter Student Class'}} )} name="S_Class"/><p className='p-0 m-0 errorStyle'>{errors.S_Class?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Medium</label><select  {...register('S_Board',{required:{value:true, message:'Please enter Board'}} )} name="S_Board"><option  value="">Select Board</option><option value="UP BOARD">UP BOARD</option><option value="ICSE">ICSE</option><option value="CBSE">CBSE</option></select><p className='p-0 m-0 errorStyle'>{errors.S_Board?.message}</p></Col>
-              <Col sm={4} className="p-1"><label>Coaching Fees</label><input placeholder='Fees'  {...register('Fee',{required:{value:true, message:'Please enter Fees Amt'}} )} name="Fee"/><p className='p-0 m-0 errorStyle'>{errors.Coaching_Time?.message}</p></Col>
+              <Col sm={4} className="p-1"><label>Coaching Fees</label><input placeholder='Fees'  {...register('Fee',{required:{value:true, message:'Please enter Fees Amt'}} )} name="Fee" onKeyDown={handlechanges} autoCapitalize='off'/><p className='p-0 m-0 errorStyle'>{errors.Fee?.message}</p></Col>
               {/* <Col sm={4} className="p-1"><label>Subjects</label><select><option selected>Select Sujects </option><option>Hindi</option><option>English</option><option>Math</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>Science</option><option>Commerce</option><option>Arts Stream</option></select></Col> */}
               <Col sm={12} className='p-0'><button type='submit' onClick={handleSubmit(handleForm) } className='default-btn'>ADD</button>
               <button className='default-btn' type='reset' onClick={()=> {  setShowForm(false); reset()  } }>Cancel</button></Col>

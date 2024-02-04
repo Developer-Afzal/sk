@@ -30,7 +30,7 @@ const addmissionOption ={
 } 
 
   return (
-    <Container >
+    <Container className='p-3'>
       <Row>
         <Col sm={12} className='upperContent'>
           <Stack gap={3} className='flex-sm-row'>
