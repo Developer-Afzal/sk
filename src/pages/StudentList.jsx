@@ -158,7 +158,7 @@ const StudentList = () => {
                   <td className='text-center'>{itm.S_Board}</td>
                   <td className='text-center'>{itm.Address}</td>
                   <td className='text-center'>{itm.Fee}</td>
-                  <td className='text-center position-relative'>
+                  <td className='text-center'>
                   <div className='popover d-sm-none _flex'>
                     <div className={popOver && UserId === itm.id ? 'popoverOpen' : 'icons-block'}>
                     <img className='icons' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
@@ -185,7 +185,7 @@ const StudentList = () => {
              </>
              : <>  
           <form>
-           <Container>
+           <Container className='py-2'>
            <Row className='text-start'>
               <Col sm={4} className="p-1"><label>Student Name</label><input placeholder='Enter Student Name' name="S_Name" {...register('S_Name' ,{required:{value:true, message:'Please enter Name'}} ) }  autoComplete='off'/><p className='p-0 m-0 errorStyle'>{errors.S_Name?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Student's Father Name</label><input placeholder="Enter Student's Father Name"  {...register('S_Fname' ,{required:{value:true, message:"Please enter Father's Name"}} )} name="S_Fname" autoComplete='off'/><p className='p-0 m-0 errorStyle'>{errors.S_Fname?.message}</p></Col>
@@ -199,7 +199,7 @@ const StudentList = () => {
               <Col sm={4} className="p-1"><label>Medium</label><select  {...register('S_Board',{required:{value:true, message:'Please enter Board'}} )} name="S_Board"><option  value="">Select Board</option><option value="UP BOARD">UP BOARD</option><option value="ICSE">ICSE</option><option value="CBSE">CBSE</option></select><p className='p-0 m-0 errorStyle'>{errors.S_Board?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Coaching Fees</label><input placeholder='Fees'  {...register('Fee',{required:{value:true, message:'Please enter Fees Amt'}} )} name="Fee" onKeyDown={handlechanges} autoCapitalize='off'/><p className='p-0 m-0 errorStyle'>{errors.Fee?.message}</p></Col>
               {/* <Col sm={4} className="p-1"><label>Subjects</label><select><option selected>Select Sujects </option><option>Hindi</option><option>English</option><option>Math</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>Science</option><option>Commerce</option><option>Arts Stream</option></select></Col> */}
-              <Col sm={12} className='p-0'><button type='submit' onClick={handleSubmit(handleForm) } className='default-btn'>ADD</button>
+              <Col sm={12} className='px-1 py-0'><button type='submit' onClick={handleSubmit(handleForm) } className='default-btn'>ADD</button>
               <button className='default-btn' type='reset' onClick={()=> {  setShowForm(false); reset()  } }>Cancel</button></Col>
             </Row>
            </Container>
