@@ -17,7 +17,7 @@
 
 .default-btn{
     padding: 4px 6px;
-    font-size: var(--fs-m);
+    font-size: var(--fs-lg);
     min-width: 80px;
     margin: 2px;
     cursor: pointer;
@@ -213,7 +213,13 @@ form select{
     color:rgb(237, 6, 6);
     font-Size:var(--fs-sm);
     font-weight: 600;
+}
 
+.popover{
+    position: absolute;
+    top: 13px;
+    right: 5px;
+    width: 80px;
 }
 
 /*  Footer Styling */
