@@ -24,10 +24,10 @@ export default function Drawer() {
   const dispath = useDispatch()
   const menuData = [
     {listName:'Dashboard', path:'/sk', Icon:<HomeIcon sx={{color:'White'}}/>},
-    {listName:'Students List', path:'studentlist', Icon:<FormatListBulletedIcon sx={{color:'White'}}/> },
-    {listName:'Fee Status', path:'feestatus', Icon:<CurrencyRupeeIcon sx={{color:'White'}}/> },
-    {listName:'Important Dates', path:'importantDate', Icon:<CalendarMonthIcon sx={{color:'White'}}/>},
-    {listName:'Exam', path:'exam', Icon:<AssignmentTurnedInIcon sx={{color:'White'}}/>}
+    {listName:'Students List', path:'/studentlist', Icon:<FormatListBulletedIcon sx={{color:'White'}}/> },
+    {listName:'Fee Status', path:'/feestatus', Icon:<CurrencyRupeeIcon sx={{color:'White'}}/> },
+    {listName:'Important Dates', path:'/importantDate', Icon:<CalendarMonthIcon sx={{color:'White'}}/>},
+    {listName:'Exam', path:'/exam', Icon:<AssignmentTurnedInIcon sx={{color:'White'}}/>}
 ]
 
 const GoPage = (value)=>{

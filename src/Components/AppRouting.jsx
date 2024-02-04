@@ -18,8 +18,8 @@ const AppRouting = () => {
    <>
    <BrowserRouter>
       <Routes>
-          <Route path='sk' element={<Layout isAuth={User_Auth}/>}>
-          <Route index element={<Dashboard/>}/>
+          <Route element={<Layout isAuth={User_Auth}/>}>
+          <Route path='sk' element={<Dashboard/>}/>
           <Route path="studentlist" element={<StudentList/>}/>
           <Route path="studentlist/view" element={<ViewUser/>}/>
           <Route path="exam" element={<Exam/>}/>
