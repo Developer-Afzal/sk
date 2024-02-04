@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Col, Row } from 'react-bootstrap'
 import {Insert, Updation, Deletion, Read} from '../features/crudSlice'
@@ -28,6 +28,9 @@ const StudentList = () => {
     const navigate = useNavigate()
     const ElementRef = useRef(null)
     // console.log(Math.ceil(userData.length/5));
+    useEffect(()=>{
+      navigate('/sk/studentlist')
+    },[])
 
     const Added = (values)=>{
       if(isEdit){
