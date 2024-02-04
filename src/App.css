@@ -65,9 +65,8 @@
             padding: 2px;
         }
         .icons-block{
-    display: none;
+                 display: none;
             }
-
 
         .more-icons{
             width:25px;
@@ -225,10 +224,12 @@ form select{
 }
 
 .popover{
-    position: absolute;
-    z-index: 10;
-    top: 13px;
-    right: 5px;
+    position: relative;
+    bottom: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 18px;
     width: 40px;
     height: 20px;
     border: none !important;
@@ -237,19 +238,24 @@ form select{
    
 }
 
-.popover:hover{
-    width: 100px;
-   .icons-block{
+.popoverOpen{
+    position: absolute;
     display: flex;
-    gap: 5px;
-    justify-content: center;
-    background-color: var(--WhiteColor);
+    justify-content: space-around;
     border-radius: 4px;
-   }
-   .info{
-    display: none;
-   }
+    right: 15px;
+    width: 100px;
+    display: flex;
+    width: 100px;
+    background-color: #fff;
+    animation-name: example;
+    animation-duration: 1s;
 }
+
+@keyframes example {
+    0%   {width:10px; top:0px;}
+    100% {width:100px; top:0px;}
+  }
 
 /*  Footer Styling */
 
