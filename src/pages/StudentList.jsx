@@ -17,16 +17,15 @@ const StudentList = () => {
     const {register, handleSubmit, reset, setValue, formState:{errors}} = form;
     const [isEdit, SetEdit] = useState(false);
     const [UserId, setUserID] = useState('');
-    const [popOver, setpopOver] = useState(false);
     const [ShowForm, setShowForm] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage_Records, setperPage_Records] = useState(5)
     const [Startpage, setStartPage] = useState(0)
     const [EndPage, setEndPage] = useState(5)
+    const [popOver, setpopOver] = useState(false);
     const userData = useSelector((state)=> state.crud.users)
     const Dispatch = useDispatch();
     const navigate = useNavigate()
-    const ElementRef = useRef(null)
     // console.log(Math.ceil(userData.length/5));
     useEffect(()=>{
       navigate('/sk/studentlist')
@@ -146,7 +145,7 @@ const StudentList = () => {
             </thead>
             <tbody>
             {userData.slice(Startpage,EndPage).map((itm)=>
-                <tr key={itm.id}>
+                <tr key={itm.id} >
                   <td>{itm.S_Name}</td>
                   <td className='text-center'>{itm.Date_of_Birth}</td>
                   <td className='text-center'>{itm.S_Class}</td>
@@ -154,11 +153,16 @@ const StudentList = () => {
                   <td className='text-center'>{itm.Address}</td>
                   <td className='text-center'>{itm.Fee}</td>
                   <td className='text-center position-relative'>
-                 {UserId == itm.id ? <Stack className='popover d-sm-none rounded-1' direction="row" spacing={1}>
-                    <img className='icons ms-1' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
+                  <div className='popover d-sm-none _flex'>
+                    <div className='icons-block'>
+                    <img className='icons' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
                     <img className='icons' src={ViewIcon} onClick={()=>ViewUser(itm)} alt="View"/>
                     <img className='icons' src={DeleteIcon} onClick={()=> Deletionvalue(itm?.id)} alt="delete"/>
-                      </Stack>  : <img className='icons d-sm-none' src={moreIcon} onClick={()=> openActionlist(itm.id)}/>  } 
+                    </div>
+                    <spna className="info">
+                      <img className='icons' src={moreIcon}/>
+                    </spna>
+                  </div>
                       <img className='icons d-none d-sm-inline' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
                       <img className='icons d-none d-sm-inline' src={ViewIcon} onClick={()=>ViewUser(itm)} alt="View"/> 
                       <img className='icons d-none d-sm-inline' src={DeleteIcon} onClick={()=> Deletionvalue(itm?.id)} alt="delete"/>
@@ -170,7 +174,7 @@ const StudentList = () => {
             </Container>
             { /* <button className='default-btn' onClick={GoAsynchPage}>Go To AsyncThunk Example</button> */}
             <Stack spacing={2} className='mt-2 pe-3' direction='row' justifyContent="flex-end">
-              <Pagination page={currentPage} siblingCount={2} count={Math.ceil(userData.length/5)} onChange={handlePageChange} ref={ElementRef} className='pagination'/>
+              <Pagination page={currentPage} siblingCount={2} count={Math.ceil(userData.length/5)} onChange={handlePageChange} className='pagination'/>
               </Stack> 
              </>
              : <>  
