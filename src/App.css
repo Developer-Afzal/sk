@@ -300,3 +300,14 @@ form select{
     color: var(--yellow);
 }
 
+
+/* fees status page styling  */
+
+.unpaid-fee{
+    width: 20px;
+    height:20px;
+    background-color: rgb(252, 59, 5);
+    background-color: #918a8a;
+    border-radius: 10px;
+    margin: 4px;
+}

@@ -23,7 +23,7 @@ const StudentList = () => {
     const [Startpage, setStartPage] = useState(0)
     const [EndPage, setEndPage] = useState(5)
     const [popOver, setpopOver] = useState(false);
-    const userData = useSelector((state)=> state.crud.users)
+    const userData = useSelector((state)=> state.crud.users);
     const Dispatch = useDispatch();
     const navigate = useNavigate()
     // console.log(Math.ceil(userData.length/5));
@@ -198,6 +198,7 @@ const StudentList = () => {
               <Col sm={4} className="p-1"><label>Student Class</label><input placeholder="Enter Student Class"  {...register('S_Class',{required:{value:true, message:'Please enter Student Class'}} )} name="S_Class"/><p className='p-0 m-0 errorStyle'>{errors.S_Class?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Medium</label><select  {...register('S_Board',{required:{value:true, message:'Please enter Board'}} )} name="S_Board"><option  value="">Select Board</option><option value="UP BOARD">UP BOARD</option><option value="ICSE">ICSE</option><option value="CBSE">CBSE</option></select><p className='p-0 m-0 errorStyle'>{errors.S_Board?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Coaching Fees</label><input placeholder='Fees'  {...register('Fee',{required:{value:true, message:'Please enter Fees Amt'}} )} name="Fee" onKeyDown={handlechanges} autoCapitalize='off'/><p className='p-0 m-0 errorStyle'>{errors.Fee?.message}</p></Col>
+              <Col sm={4} className="p-1"><label>Date of Joining</label><input type='text'  placeholder="dd/mm/yyyy"  onFocus={(e)=> { e.currentTarget.type = "date"; e.currentTarget.focus();}}  {...register('joining_date',{required:{value:true, message:'Please enter DOB'}} )} name="joining_date"/><p className='p-0 m-0 errorStyle'>{errors.joining_date?.message}</p></Col>
               {/* <Col sm={4} className="p-1"><label>Subjects</label><select><option selected>Select Sujects </option><option>Hindi</option><option>English</option><option>Math</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>Science</option><option>Commerce</option><option>Arts Stream</option></select></Col> */}
               <Col sm={12} className='px-1 py-0'><button type='submit' onClick={handleSubmit(handleForm) } className='default-btn'>ADD</button>
               <button className='default-btn' type='reset' onClick={()=> {  setShowForm(false); reset()  } }>Cancel</button></Col>

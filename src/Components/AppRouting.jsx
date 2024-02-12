@@ -16,7 +16,7 @@ const AppRouting = () => {
     const User_Auth = useSelector((state)=> state.Auth)
   return (
    <>
-   <BrowserRouter>
+   <BrowserRouter >
       <Routes>
           <Route element={<Layout isAuth={User_Auth}/>}>
           <Route path='sk' element={<Dashboard/>}/>
