@@ -89,7 +89,7 @@ const Feestatus = () => {
     <table>
             <thead>
                 <tr>
-                  <th>Enrollment No </th>
+                  <th>Roll No </th>
                   <th>Student</th>
                   <th className='text-center' >DOB</th>
                   <th className='text-center'>Class</th>
@@ -116,14 +116,13 @@ const Feestatus = () => {
           </table>
     </Row> :!openForm && userId ?  
     <Row>
-      <Col sm={4}>
+      <Col sm={12} md={4} className='text-center'>
         <div>
           <img className='w-75' src="https://img.freepik.com/free-vector/smiling-boy-portrait-casual-clothing-cartoon-style-kid-avatar-happy-teenager-vector-character_90220-2150.jpg?w=740&t=st=1707826921~exp=1707827521~hmac=16bf803ad5c58224d308ea319511b317fda49fbe874035f5207b3eab16d68648"  />
         </div>
       </Col>
-      <Col sm={8}>
-       <Row>
-       <Col sm={6} className='ps-5'>
+      <Col sm={12} md={8} className='_flex align-items-start'>
+       <Col sm={4} className='ps-sm-5'>
           <p> Roll No  : {UserInfo?.id}</p>
           <p> Name : {UserInfo?.S_Name}</p>
           <p> Class : {UserInfo?.S_Class}</p>
@@ -132,7 +131,7 @@ const Feestatus = () => {
           <p> Joining Date : {UserInfo?.Joining_Date}</p>
           <p> Status : {UserInfo?.Status}</p>
         </Col>
-        <Col sm={6}>
+        <Col sm={4}>
         <p> Father Name : {UserInfo?.S_Fname}</p>
         <p> Mother Name : {UserInfo?.S_Mname}</p>
         <p> Date of Birth : {UserInfo?.Date_of_Birth}</p>
@@ -140,8 +139,8 @@ const Feestatus = () => {
         <p> Pincode : {UserInfo?.Pincode}</p>
         <p> Contact No : {UserInfo?.P_Contact}</p>
         </Col>
-       </Row>
       </Col>
+      
     </Row> : 
     <Col className='position-relative'>
       <form onSubmit={handleSubmit(handleform)}>
