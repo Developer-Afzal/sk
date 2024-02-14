@@ -25,6 +25,7 @@ const AppRouting = () => {
           <Route path="sk/exam" element={<Exam/>}/>
           <Route path="sk/importantDate" element={<ImportantDate/>}/>
           <Route path="sk/feestatus" element={<Feestatus/>}/>
+          <Route path="sk/feestatus/:userId" element={<Feestatus/>}/>
           <Route path="reduxAsyncthunk" element={<AsyncThunkEx/>}/>
           </Route>  
           {User_Auth ? <Route path="sk" element={<Login/>}/> : ''}   
