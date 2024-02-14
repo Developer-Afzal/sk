@@ -27,7 +27,7 @@ const ViewUser = () => {
           <Col xs sm={6} className='p-0'>{ViewSingleUser?.Fee}</Col>
           <Col xs={{span: 4, offset: 2 }} sm={{span: 2, offset: 4 }} className=' p-0'>Fees Status</Col>
           <Col xs sm={6} className='p-0'>Paid</Col>
-            <Col xs={{span: 4, offset:2 }} sm={{span: 2, offset: 4 }} className=' py-3 px-0'><button className='default-btn' onClick={()=> navigate('/sk/feestatus')}>Check</button><button className='default-btn' onClick={()=> navigate(-1)}>Back</button></Col>
+            <Col xs={{span: 4, offset:2 }} sm={{span: 2, offset: 4 }} className=' py-3 px-0'><button className='default-btn' onClick={()=> navigate(`/sk/feestatus/${ViewSingleUser?.id}`)}>Check</button><button className='default-btn' onClick={()=> navigate(-1)}>Back</button></Col>
           </Row>
         </Col>
       

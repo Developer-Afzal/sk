@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Col, Row } from 'react-bootstrap'
 import {Insert, Updation, Deletion, Read} from '../features/crudSlice'
+import {AcceptFee} from '../features/StdfeeSlice'
 import { useNavigate } from 'react-router-dom'
 import DeleteIcon from '../Images/delete.png'
 import Pagination from '@mui/material/Pagination';
@@ -35,6 +36,7 @@ const StudentList = () => {
       if(isEdit){
         let std_Data = values;
         std_Data['id'] = UserId;
+        std_Data['Status'] = 'UnPaid'
         Dispatch(Updation(std_Data))
       }else{
         Dispatch(Insert(values))

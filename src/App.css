@@ -133,6 +133,7 @@ thead tr th:first-child{
 
 tbody tr td:first-child{
     padding-left: 10px;
+    max-width: 100px !important;
 }
 
 
@@ -307,7 +308,20 @@ form select{
     width: 20px;
     height:20px;
     background-color: rgb(252, 59, 5);
-    background-color: #918a8a;
     border-radius: 10px;
     margin: 4px;
+}
+
+.null-fee{
+    background-color: #a89c9c;
+}
+
+.select-month{
+    background-color: var(--lightYellow);
+    color: var(--WhiteColor);
+    cursor: pointer; 
+}
+
+.select-month:hover{
+    background-color: var(--yellow);
 }
