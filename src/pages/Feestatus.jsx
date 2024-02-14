@@ -10,6 +10,7 @@ import {useForm} from 'react-hook-form'
 const Feestatus = () => {
   const UserInfo = useSelector((state)=>  state.crud.ViewUser)
   const userData = useSelector((state)=> state.crud.users)
+  const FeeData = useSelector((state)=> state.fees)
   const { userId } = useParams();
   const navigate = useNavigate();
   const dispath = useDispatch();
@@ -19,24 +20,23 @@ const Feestatus = () => {
   const [showmonth, setShowMonth] = useState(false);
   useEffect(()=>{
     if(userId){
-      console.log(userId)
+      // console.log(userId)
     }else{
-      console.log(userId);
+      // console.log(userId);
     }
   },[userId])
 
-  console.log(UserInfo.value);
+  // console.log(UserInfo.value);
   const date = new Date();
   if(UserInfo == undefined){
     let CurrDate = date.getDate()
     let CurrMonth = date.getMonth()+1;
     let CurrYear = date.getFullYear();
-    console.log(CurrDate, CurrMonth, CurrYear );
+    // console.log(CurrDate, CurrMonth, CurrYear );
     let join_Year =  UserInfo?.Joining_Date.split('-', 1);
     let join_Month =  UserInfo?.Joining_Date.split('-', 2);
     let join_Date =  UserInfo?.Joining_Date.split('-', 3)
   }
-  console.log();
   const fee_status = {
     student_info : '12-12-23',
    student_status : [
@@ -67,8 +67,15 @@ const Feestatus = () => {
 
  const handleform = (data)=>{
   let {Enroll, month} = data;
-  dispath(AcceptFee({Enroll,month}));
-  setOpenForm(false)
+  let item = FeeData[`${month}`].find(itm => itm.id == data.Enroll)
+    // console.log(item)
+    if(item){
+      alert('already deposit')
+    } else{
+      dispath(AcceptFee({Enroll,month}));
+      setOpenForm(false)
+    }
+   
  }
 
 
@@ -93,7 +100,7 @@ const Feestatus = () => {
                 </tr>
             </thead>
             <tbody>
-              {userData.map((itm)=> <tr>
+              {userData.map((itm)=> <tr key={itm.id}>
                 <td>{itm.id} </td>
                 <td>{itm.S_Name} </td>
                 <td className='text-center'>{itm.Date_of_Birth} </td>
