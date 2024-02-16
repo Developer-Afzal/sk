@@ -7,6 +7,11 @@ import ViewIcon from '../Images/view.png'
 import { Read } from '../features/crudSlice';
 import {AcceptFee} from '../features/StdfeeSlice'
 import {useForm} from 'react-hook-form'
+import Snackbarcompo from '../Components/Snackbarcompo';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import Alert from '@mui/material/Alert';
+import { Slide } from '@mui/material';
 const Feestatus = () => {
   const UserInfo = useSelector((state)=>  state.crud.ViewUser)
   const userData = useSelector((state)=> state.crud.users)
@@ -18,6 +23,7 @@ const Feestatus = () => {
   const form =  useForm();
   const {register, handleSubmit, setValue} = form;
   const [showmonth, setShowMonth] = useState(false);
+  const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
   useEffect(()=>{
     if(userId){
       // console.log(userId)
@@ -70,14 +76,27 @@ const Feestatus = () => {
   let item = FeeData[`${month}`].find(itm => itm.id == data.Enroll)
     // console.log(item)
     if(item){
-      alert('already deposit')
+      openSnackBar(true)
     } else{
       dispath(AcceptFee({Enroll,month}));
-      setOpenForm(false)
-    }
-   
+      setOpenForm(false);
+      setsnackBar((prevState)=>({
+        ...prevState,
+        Click:true,
+        message:'Fee accepted successfully',
+        msgType:'success'
+      }))
+    } 
  }
 
+ const openSnackBar = (value)=>{
+  setsnackBar((prevState)=>({
+    ...prevState,
+    Click:value,
+    message:'Fee already paid for this month',
+    msgType:'error'
+  }))
+ }
 
   return (
   <Container fluid>
@@ -86,7 +105,7 @@ const Feestatus = () => {
     <button className='default-btn ms-auto' onClick={AcceptFees }>Accept Fee</button>
     </Stack>
     {!userId && !openForm ? <Row>
-    <table>
+    <table className='table-block'>
             <thead>
                 <tr>
                   <th>Roll No </th>
@@ -117,12 +136,12 @@ const Feestatus = () => {
     </Row> :!openForm && userId ?  
     <Row>
       <Col sm={12} md={4} className='text-center'>
-        <div>
+       
           <img className='w-75' src="https://img.freepik.com/free-vector/smiling-boy-portrait-casual-clothing-cartoon-style-kid-avatar-happy-teenager-vector-character_90220-2150.jpg?w=740&t=st=1707826921~exp=1707827521~hmac=16bf803ad5c58224d308ea319511b317fda49fbe874035f5207b3eab16d68648"  />
-        </div>
+       
       </Col>
-      <Col sm={12} md={8} className='_flex align-items-start'>
-       <Col sm={4} className='ps-sm-5'>
+      <Col sm={8} className='_flex align-items-start'>
+       <Col sm={6} className='ps-sm-5'>
           <p> Roll No  : {UserInfo?.id}</p>
           <p> Name : {UserInfo?.S_Name}</p>
           <p> Class : {UserInfo?.S_Class}</p>
@@ -169,6 +188,7 @@ const Feestatus = () => {
       </form>
     </Col>
     }
+      <Snackbarcompo data={snackBar} openSnackBar={openSnackBar}/>
   </Container>
   )
 }
