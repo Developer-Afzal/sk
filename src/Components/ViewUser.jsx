@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
 
 const ViewUser = () => {
-  const ViewSingleUser = useSelector((state) => state.crud.ViewUser);
+  const UserList = useSelector((state) => state.crud.users);
+  const [ViewSingleUser, setViewSingleUser] = useState();
   const navigate = useNavigate()
+  const Param = useParams();
+  useEffect(()=>{
+   let singleUser =  UserList.filter((itm)=> itm.id == Param.userId)
+    setViewSingleUser(singleUser[0])
+  },[])
   return (
       <Container className='view-block'>
         <Col xs sm={{span: 4, offset: 3 }} className='text-center view-heading'>
