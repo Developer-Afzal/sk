@@ -1,18 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-   Apr: [{id:2324, fee:'paid'}],
-   May: [{id:2324, fee:'paid'}],
-   Jun: [{id:2324, fee:'paid'}],
-   Jul: [{id:2324, fee:'paid'}],
-   Aug: [{id:2324, fee:'paid'}],
-   Sep: [{id:2324, fee:'paid'}],
-   Oct: [{id:2324, fee:'paid'}],
-   Nov: [{id:2324, fee:'paid'}],
-   Dec: [{id:2324, fee:'paid'}],
-   Jan: [{id:2324, fee:'paid'}],
-   Feb: [{id:2324, fee:'paid'}],
-   Mar: [{id:2324, fee:'paid'}],
+   Apr: [], May: [], Jun: [], Jul: [], Aug: [], Sep: [], Oct: [], Nov: [], Dec: [], Jan: [], Feb: [], Mar: [],
 }
 
 export const StdFeeSlice = createSlice ({

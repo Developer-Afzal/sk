@@ -73,7 +73,7 @@ const StudentList = () => {
 
     const ViewUser = (itm)=>{
       Dispatch(Read(itm))
-      navigate('view')
+      navigate(`${itm}`)
     }
 
 
@@ -172,7 +172,7 @@ const StudentList = () => {
                     </span>
                   </div>
                       <img className='icons d-none d-sm-inline' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
-                      <img className='icons d-none d-sm-inline' src={ViewIcon} onClick={()=>ViewUser(itm)} alt="View"/> 
+                      <img className='icons d-none d-sm-inline' src={ViewIcon} onClick={()=>ViewUser(itm?.id)} alt="View"/> 
                       <img className='icons d-none d-sm-inline' src={DeleteIcon} onClick={()=> Deletionvalue(itm?.id)} alt="delete"/>
                   </td>  
                 </tr>

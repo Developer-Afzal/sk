@@ -21,7 +21,7 @@ const AppRouting = () => {
           <Route element={<Layout isAuth={User_Auth}/>}>
           <Route path='sk' element={<Dashboard/>}/>
           <Route path="sk/studentlist" element={<StudentList/>}/>
-          <Route path="sk/studentlist/view" element={<ViewUser/>}/>
+          <Route path="sk/studentlist/:userId" element={<ViewUser/>}/>
           <Route path="sk/exam" element={<Exam/>}/>
           <Route path="sk/importantDate" element={<ImportantDate/>}/>
           <Route path="sk/feestatus" element={<Feestatus/>}/>
