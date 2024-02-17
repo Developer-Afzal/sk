@@ -164,7 +164,7 @@ const StudentList = () => {
                   <div className='popover d-sm-none _flex'>
                     <div className={popOver && UserId === itm.id ? 'popoverOpen' : 'icons-block'}>
                     <img className='icons' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
-                    <img className='icons' src={ViewIcon} onClick={()=>ViewUser(itm)} alt="View"/>
+                    <img className='icons' src={ViewIcon} onClick={()=>ViewUser(itm?.id)} alt="View"/>
                     <img className='icons' src={DeleteIcon} onClick={()=> Deletionvalue(itm?.id)} alt="delete"/>
                     </div>
                     <span className={popOver && UserId == itm.id ? 'd-none' :  "info" }>

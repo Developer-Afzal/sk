@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row, Stack} from 'react-bootstrap'
-import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import ViewIcon from '../Images/view.png'
@@ -8,15 +7,10 @@ import { Read } from '../features/crudSlice';
 import {AcceptFee} from '../features/StdfeeSlice'
 import {useForm} from 'react-hook-form'
 import Snackbarcompo from '../Components/Snackbarcompo';
-import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@mui/material/IconButton';
-import Alert from '@mui/material/Alert';
-import { Slide } from '@mui/material';
 const Feestatus = () => {
-  const UserInfo = useSelector((state)=>  state.crud.ViewUser)
   const userData = useSelector((state)=> state.crud.users)
   const FeeData = useSelector((state)=> state.fees)
-  const { userId } = useParams();
+  const userId  = useParams();
   const navigate = useNavigate();
   const dispath = useDispatch();
   const [openForm, setOpenForm] = useState(false)
@@ -24,13 +18,13 @@ const Feestatus = () => {
   const {register, handleSubmit, setValue} = form;
   const [showmonth, setShowMonth] = useState(false);
   const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
+  const [UserInfo, setUserInfo] = useState()
   useEffect(()=>{
     if(userId){
-      // console.log(userId)
-    }else{
-      // console.log(userId);
+      let singleStd = userData.filter((itm)=> itm.id == userId?.userId);
+      setUserInfo(singleStd[0]);
     }
-  },[userId])
+  },[userId?.userId])
 
   // console.log(UserInfo.value);
   const date = new Date();
@@ -43,23 +37,15 @@ const Feestatus = () => {
     let join_Month =  UserInfo?.Joining_Date.split('-', 2);
     let join_Date =  UserInfo?.Joining_Date.split('-', 3)
   }
-  const fee_status = {
-    student_info : '12-12-23',
-   student_status : [
-    {title:'Jan', status :null},
-    {title:'Feb', status :'paid'},
-    {title:'Mar', status :'paid'},
-    {title:'Apr', status :'unpaid'},
-    {title:'May', status :'unpaid'},
-    {title:'Jun', status :'unpaid'},
-    {title:'Jul', status :'unpaid'},
-    {title:'Aug', status :'unpaid'},
-    {title:'Sep', status :'unpaid'},
-    {title:'Oct', status :'unpaid'},
-    {title:'Nov', status :'unpaid'},
-    {title:'Dec', status :'unpaid'}
-    ]
- } 
+
+  const getfeeStatus = (value)=>{
+   let data =  FeeData[`${value}`]
+    let getVal =  data.filter((itm)=> itm.id == userId?.userId)
+    console.log(getVal);
+    return getVal[0]?.fee
+};
+
+
 
  const AcceptFees = ()=>{
   setOpenForm(true)
@@ -101,10 +87,10 @@ const Feestatus = () => {
   return (
   <Container fluid>
     <Stack direction="horizontal">
-    {!userId ? <h1>Fee Status</h1> : <h1>Student Info</h1>}
+    {!userId?.userId ? <h1>Fee Status</h1> : <h1>Student Info</h1>}
     <button className='default-btn ms-auto' onClick={AcceptFees }>Accept Fee</button>
     </Stack>
-    {!userId && !openForm ? <Row>
+    {!userId?.userId && !openForm ? <Row>
     <table className='table-block'>
             <thead>
                 <tr>
@@ -128,12 +114,12 @@ const Feestatus = () => {
                 <td className='text-center'>{itm.Fee}</td>
                 <td className='text-center'>{itm.Status}</td>
                 <td className='text-center'>
-                <img className='icons' src={ViewIcon}  alt="View" onClick={()=> {dispath(Read(itm)); navigate(`/sk/feestatus/${itm.id}`); }}/>
+                <img className='icons' src={ViewIcon}  alt="View" onClick={()=> {navigate(`/sk/feestatus/${itm.id}`); }}/>
                 </td>
               </tr>)}
             </tbody>
           </table>
-    </Row> :!openForm && userId ?  
+    </Row> :!openForm && userId?.userId ?  
     <Row>
       <Col sm={12} md={4} className='text-center'>
        
@@ -159,7 +145,21 @@ const Feestatus = () => {
         <p> Contact No : {UserInfo?.P_Contact}</p>
         </Col>
       </Col>
-      
+      <Col sm={12} md={9} className='offset-md-3 _flex feePaidstatus-block'>
+          <div className='_flex gap-1'>Apr <div className={getfeeStatus('Apr') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>May <div className={getfeeStatus('May') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>Jun <div className={getfeeStatus('Jun') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>Jul <div className={getfeeStatus('Jul') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>Aug <div className={getfeeStatus('Aug') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>Sep <div className={getfeeStatus('Sep') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>Oct <div className={getfeeStatus('Oct') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>Nov <div className={getfeeStatus('Nov') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>Dec <div className={getfeeStatus('Dec') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>Jan <div className={getfeeStatus('Jan') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>Feb <div className={getfeeStatus('Feb') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+          <div className='_flex gap-1'>Mar <div className={getfeeStatus('Mar') == 'paid' ? 'paid-fee' : 'unpaid-fee'}></div></div>
+
+        </Col>
     </Row> : 
     <Col className='position-relative'>
       <form onSubmit={handleSubmit(handleform)}>

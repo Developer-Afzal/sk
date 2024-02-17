@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 
 const ViewUser = () => {
   const UserList = useSelector((state) => state.crud.users);
+  const FeeStatus = useSelector((state)=> state.fee)
   const [ViewSingleUser, setViewSingleUser] = useState();
   const navigate = useNavigate()
   const Param = useParams();
