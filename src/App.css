@@ -73,6 +73,9 @@
             padding: 2px;
         }
     }  
+
+
+  
 }
 
 
@@ -304,16 +307,28 @@ form select{
 
 /* fees status page styling  */
 
+.feePaidstatus-block{
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
 .unpaid-fee{
     width: 20px;
     height:20px;
     background-color: rgb(252, 59, 5);
     border-radius: 10px;
-    margin: 4px;
+
 }
 
 .null-fee{
     background-color: #a89c9c;
+}
+
+.paid-fee{
+    width: 20px;
+    height:20px;
+    border-radius: 10px;
+    background-color: green;
 }
 
 .select-month{
