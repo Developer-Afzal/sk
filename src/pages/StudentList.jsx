@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Col, Row } from 'react-bootstrap'
 import {Insert, Updation, Deletion, Read} from '../features/crudSlice'
-import {AcceptFee} from '../features/StdfeeSlice'
 import { useNavigate } from 'react-router-dom'
 import DeleteIcon from '../Images/delete.png'
 import Pagination from '@mui/material/Pagination';
@@ -11,6 +10,7 @@ import ViewIcon from '../Images/view.png'
 import EditIcon from '../Images/edit.png'
 import moreIcon from '../Images/moreIcon.png'
 import {useForm} from 'react-hook-form'
+import Modal from '../Components/Modal'
 
 
 const StudentList = () => {
@@ -24,6 +24,7 @@ const StudentList = () => {
     const [Startpage, setStartPage] = useState(0)
     const [EndPage, setEndPage] = useState(5)
     const [popOver, setpopOver] = useState(false);
+    const [openModal, setopenModal] = useState(false)
     const userData = useSelector((state)=> state.crud.users);
     const Dispatch = useDispatch();
     const navigate = useNavigate()
@@ -65,11 +66,20 @@ const StudentList = () => {
     }
 
     const Deletionvalue = (User) =>{
-      Dispatch(Deletion(User))
+      setopenModal(true)
+      setUserID(User)
+    }
+
+    const Hidemodal = (value)=>{
+      setopenModal(value?.close)
+      if(value?.Click){
+        Dispatch(Deletion(UserId))
       if(userData.slice(Startpage,EndPage).length === 1) {
-        handlePageChange('', currentPage-1 )
+          handlePageChange('', currentPage-1 )
+        }
       }
     }
+
 
     const ViewUser = (itm)=>{
       Dispatch(Read(itm))
@@ -179,6 +189,7 @@ const StudentList = () => {
                 )}
             </tbody>
           </table> 
+          <Modal data={openModal} HideModal={Hidemodal}/>
             </Container>
             { /* <button className='default-btn' onClick={GoAsynchPage}>Go To AsyncThunk Example</button> */}
             <Stack spacing={2} className='mt-2 pe-3' direction='row' justifyContent="flex-end">
