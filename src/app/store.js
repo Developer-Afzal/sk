@@ -1,11 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
-import CRUDOPRATION from '../features/crudSlice'
-import Authentication from '../features/LoginSlice'
-import FeeStatus from '../features/StdfeeSlice'
+import { persistReducer, persistStore } from 'redux-persist';
+import storage  from 'redux-persist/lib/storage';
+import rootReducer from '../features/CombineSlice';
+
+
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+  const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 export const store = configureStore({
-  reducer: {
-    crud: CRUDOPRATION,
-    Auth: Authentication,
-    fees: FeeStatus
-  },
+  reducer : persistedReducer
 })
+
+export const persistor = persistStore(store)
