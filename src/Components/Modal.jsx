@@ -29,7 +29,7 @@ export default function Modal(props) {
       </Button> */}
       <Dialog
         open={props.data}
-        onClose={handleClose}
+        onClose={()=> handleClose(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >

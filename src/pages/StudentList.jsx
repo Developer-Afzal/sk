@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Col, Row } from 'react-bootstrap'
 import {Insert, Updation, Deletion, Read} from '../features/crudSlice'
+import {RemovefeeStatus} from '../features/StdfeeSlice'
 import { useNavigate } from 'react-router-dom'
 import DeleteIcon from '../Images/delete.png'
 import Pagination from '@mui/material/Pagination';
@@ -73,7 +74,8 @@ const StudentList = () => {
     const Hidemodal = (value)=>{
       setopenModal(value?.close)
       if(value?.Click){
-        Dispatch(Deletion(UserId))
+        Dispatch(Deletion(UserId));
+        Dispatch(RemovefeeStatus(UserId))
       if(userData.slice(Startpage,EndPage).length === 1) {
           handlePageChange('', currentPage-1 )
         }
