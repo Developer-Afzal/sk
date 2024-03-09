@@ -3,13 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
 
 const initialState = {
-    users:[
-      {id:68124,S_Name:'Afzal Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'223242', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2010-2-23', S_Board:'CBSE', S_Class:'X', Fee:'1500', Joining_Date:'2023-4-28', Status:'Paid'},
-      {id:87891,S_Name:'Asad Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'786723', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2009-1-23', S_Board:'CBSE', S_Class:'X', Fee:'1500', Joining_Date:'2023-4-20', Status:'Paid'},
-      {id:29998,S_Name:'Ahid Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'878893', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2007-11-23', S_Board:'CBSE', S_Class:'X', Fee:'1500', Joining_Date:'2023-5-21', Status:'UnPaid'},
-      {id:89789,S_Name:'Rahul Singh', S_Fname:'Vijay Singh', S_Mname:'Neelam Singh', Address:'nehru Place, Delhi',Pincode:'908978', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2010-5-23', S_Board:'CBSE', S_Class:'X', Fee:'1500', Joining_Date:'2023-7-18', Status:'Paid'},
-      {id:98989,S_Name:'Afzal Ansari', S_Fname:'Suhail Ansari', S_Mname:'Sayara Bano', Address:'537 GHA/ 323, LKO',Pincode:'098776', Coaching_Time:'4:00 To 7:00', P_Contact:'909898765', Date_of_Birth:'2011-12-23', S_Board:'CBSE', S_Class:'X', Fee:'1500', Joining_Date:'2023-6-08', Status:'Paid'},
-    ],
+    users:[],
     ViewUser:[]
   }
 
@@ -40,7 +34,6 @@ export const FetchPost = createAsyncThunk('fetch/post', async () =>{
               S_Class:action.payload.S_Class,
               Fee:action.payload.Fee,
               Joining_Date:action.payload.joining_date,
-              Status:action.payload.Status
             }
             // state.users = [user, ...state.users]
             state.users.unshift(user)
@@ -68,7 +61,8 @@ export const FetchPost = createAsyncThunk('fetch/post', async () =>{
 
         Read:(state, action) => {
           state.ViewUser = action.payload
-        }
+        }, 
+
 
 
     },

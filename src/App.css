@@ -74,7 +74,9 @@
         }
     }  
 
-
+.cal-img{
+    width: 100%;
+}
   
 }
 
@@ -339,4 +341,34 @@ form select{
 
 .select-month:hover{
     background-color: var(--yellow);
+}
+
+
+/*  Important Date page styling starts here */
+
+.cal-img{
+    width: 70%;
+}
+.datalist ul{
+    border: 1px solid var(--yellow);
+    padding: 10px;
+    min-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+
+}
+
+.datalist ul li {
+    list-style-type: none;
+    color: var(--yellow);
+   
+}
+
+.datalist ul li:nth-child(2n+1){
+    background-color: var(--yellow);
+    color: var(--WhiteColor);
+}
+
+.important-content{
+    align-items: center;
 }

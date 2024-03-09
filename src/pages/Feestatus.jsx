@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row, Stack} from 'react-bootstrap'
+import { Col, Container, Row} from 'react-bootstrap'
+import Stack from '@mui/material/Stack';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import ViewIcon from '../Images/view.png'
 import { Read } from '../features/crudSlice';
-import {AcceptFee} from '../features/StdfeeSlice'
+import {AcceptFee,} from '../features/StdfeeSlice'
 import {useForm} from 'react-hook-form'
 import Snackbarcompo from '../Components/Snackbarcompo';
+import Pagination from '@mui/material/Pagination';
 const Feestatus = () => {
   const userData = useSelector((state)=> state.crud.users)
   const FeeData = useSelector((state)=> state.fees)
@@ -17,6 +19,10 @@ const Feestatus = () => {
   const form =  useForm();
   const {register, handleSubmit, setValue} = form;
   const [showmonth, setShowMonth] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage_Records, setperPage_Records] = useState(5)
+  const [Startpage, setStartPage] = useState(0)
+  const [EndPage, setEndPage] = useState(5)
   const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
   const [UserInfo, setUserInfo] = useState()
   useEffect(()=>{
@@ -26,23 +32,28 @@ const Feestatus = () => {
     }
   },[userId?.userId])
 
-  // console.log(UserInfo.value);
   const date = new Date();
-  if(UserInfo == undefined){
-    let CurrDate = date.getDate()
-    let CurrMonth = date.getMonth()+1;
-    let CurrYear = date.getFullYear();
-    // console.log(CurrDate, CurrMonth, CurrYear );
-    let join_Year =  UserInfo?.Joining_Date.split('-', 1);
-    let join_Month =  UserInfo?.Joining_Date.split('-', 2);
-    let join_Date =  UserInfo?.Joining_Date.split('-', 3)
+  let currMonth = date.toLocaleString('default', { month: 'short' })
+  const checkStdfee = (value)=>{
+    let u_data = FeeData[currMonth].map(itm => itm.id)
+    if(u_data.includes(value)){
+      return 'Paid'
+    }else{
+      return 'Unpaid'
+    }
   }
 
+
   const getfeeStatus = (value)=>{
-   let data =  FeeData[`${value}`]
-    let getVal =  data.filter((itm)=> itm.id == userId?.userId)
-    console.log(getVal);
-    return getVal[0]?.fee
+    let singleData = FeeData[value].filter(itm => itm.id === userId?.userId )
+    if(singleData){
+      return 'paid'
+    }
+    
+  //  let data =  FeeData[`${value}`]
+  //   let getVal =  data.filter((itm)=> itm.id == userId?.userId)
+  //   console.log(getVal);
+  //   return getVal[0]?.fee
 };
 
 
@@ -61,6 +72,9 @@ const Feestatus = () => {
   let {Enroll, month} = data;
   let item = FeeData[`${month}`].find(itm => itm.id == data.Enroll)
     // console.log(item)
+    let StatusData = {Status:[{id: Enroll, month:month, fee:'paid' }]}
+    let curr = UserInfo
+    console.log({...UserInfo, ...StatusData});
     if(item){
       openSnackBar(true)
     } else{
@@ -84,43 +98,62 @@ const Feestatus = () => {
   }))
  }
 
+ const handlePageChange = (e,value)=>{ 
+  setCurrentPage(value)
+  let EndPosition
+  let StartPosition
+  if(value > 1){
+    EndPosition = value * perPage_Records;
+    StartPosition = EndPosition - perPage_Records;
+    setStartPage(StartPosition);
+    setEndPage(EndPosition)
+  }else {
+    setStartPage(0);
+    setEndPage(perPage_Records)
+  }
+}
+
   return (
-  <Container fluid>
-    <Stack direction="horizontal">
-    {!userId?.userId ? <h1>Fee Status</h1> : <h1>Student Info</h1>}
+  <Container fluid className='m-0 p-0'>
+    <Stack  className="_flex pt-2 px-2" direction="row">
+    {!userId?.userId ? <h4 className='heading'>Fee Status</h4> : <h4 className='heading'>Student Info</h4>}
     <button className='default-btn ms-auto' onClick={AcceptFees }>Accept Fee</button>
     </Stack>
-    {!userId?.userId && !openForm ? <Row>
-    <table className='table-block'>
+    {!userId?.userId && !openForm ? <>
+    <Container fluid className='table-block p-0'>
+         <table>
             <thead>
                 <tr>
-                  <th>Roll No </th>
-                  <th>Student</th>
-                  <th className='text-center' >DOB</th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th className='text-center'>date of Birth</th>
                   <th className='text-center'>Class</th>
                   <th className='text-center'>Board</th>
                   <th className='text-center'>Fee</th>
-                  <th className='text-center'>Fee Status</th>
+                  <th className='text-center'>Status</th>
                   <th className='text-center'>Action</th>
                 </tr>
             </thead>
             <tbody>
-              {userData.map((itm)=> <tr key={itm.id}>
+              {userData.slice(Startpage,EndPage).map((itm)=> <tr key={itm.id}>
                 <td>{itm.id} </td>
                 <td>{itm.S_Name} </td>
                 <td className='text-center'>{itm.Date_of_Birth} </td>
                 <td className='text-center'>{itm.S_Class}</td>
                 <td className='text-center'>{itm.S_Board}</td>
                 <td className='text-center'>{itm.Fee}</td>
-                <td className='text-center'>{itm.Status}</td>
+                <td className='text-center'>{checkStdfee(itm.id)}</td>
                 <td className='text-center'>
                 <img className='icons' src={ViewIcon}  alt="View" onClick={()=> {navigate(`/sk/feestatus/${itm.id}`); }}/>
                 </td>
               </tr>)}
             </tbody>
-          </table>
-    </Row> :!openForm && userId?.userId ?  
-    <Row>
+          </table> 
+    </Container>
+    <Stack spacing={2} className=' mt-2 pe-3' direction='row' justifyContent="flex-end">
+      <Pagination page={currentPage} siblingCount={2} count={Math.ceil(userData.length/5)} onChange={handlePageChange} className='pagination'/>
+    </Stack> </>:!openForm && userId?.userId ?  
+    <Row className='p-0 m-2'>
       <Col sm={12} md={4} className='text-center'>
        
           <img className='w-75' src="https://img.freepik.com/free-vector/smiling-boy-portrait-casual-clothing-cartoon-style-kid-avatar-happy-teenager-vector-character_90220-2150.jpg?w=740&t=st=1707826921~exp=1707827521~hmac=16bf803ad5c58224d308ea319511b317fda49fbe874035f5207b3eab16d68648"  />
@@ -134,7 +167,7 @@ const Feestatus = () => {
           <p> Board : {UserInfo?.S_Board}</p>
           <p> Fee : {UserInfo?.Fee}</p>
           <p> Joining Date : {UserInfo?.Joining_Date}</p>
-          <p> Status : {UserInfo?.Status}</p>
+          <p> Status : {checkStdfee(UserInfo?.id)}</p>
         </Col>
         <Col sm={4}>
         <p> Father Name : {UserInfo?.S_Fname}</p>
