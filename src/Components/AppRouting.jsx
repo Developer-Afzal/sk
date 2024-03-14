@@ -11,6 +11,7 @@ import Exam from '../pages/Exam';
 import Feestatus from '../pages/Feestatus';
 import ImportantDate from '../pages/ImportantDate'
 import Login from '../pages/Login';
+import SearchPage from '../pages/SearchPage';
 
 const AppRouting = () => {
     const User_Auth = useSelector((state)=> state.Auth)
