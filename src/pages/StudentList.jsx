@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Container, Col, Row } from 'react-bootstrap'
+import { Container, Col, Row, Table } from 'react-bootstrap'
 import {Insert, Updation, Deletion, Read} from '../features/crudSlice'
 import {RemovefeeStatus} from '../features/StdfeeSlice'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import DeleteIcon from '../Images/delete.png'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
@@ -26,14 +26,19 @@ const StudentList = () => {
     const [EndPage, setEndPage] = useState(5)
     const [popOver, setpopOver] = useState(false);
     const [openModal, setopenModal] = useState(false)
+    const [searchData, setsearchData] = useState(null)
+    const [loader, setloader] = useState(false)
     const userData = useSelector((state)=> state.crud.users);
     const Dispatch = useDispatch();
     const navigate = useNavigate()
     // console.log(Math.ceil(userData.length/5));
+    const context = useOutletContext();
+    
+   
     useEffect(()=>{
-      navigate('/sk/studentlist')
-    },[])
-
+       setsearchData(userData.filter((itm)=> itm.S_Name.toLowerCase() == context.toLowerCase()))       
+    },[context])
+    
     const Added = (values)=>{
       if(isEdit){
         let std_Data = values;
@@ -164,7 +169,7 @@ const StudentList = () => {
                 </tr>
             </thead>
             <tbody>
-            {userData.slice(Startpage,EndPage).map((itm)=>
+            {(context ? searchData : userData).slice(Startpage,EndPage).map((itm)=>
                 <tr key={itm.id} >
                   <td>{itm.S_Name}</td>
                   <td className='text-center'>{itm.Date_of_Birth}</td>
@@ -190,13 +195,22 @@ const StudentList = () => {
                 </tr>
                 )}
             </tbody>
+           {context && searchData == '' ? 
+             <tbody>
+             <tr className='skeleton'><td colSpan={7}></td></tr>
+             <tr className='skeleton'><td colSpan={7}></td></tr>
+             <tr className='skeleton'><td colSpan={7}></td></tr>
+             <tr className='skeleton'><td colSpan={7}></td></tr>
+             <tr className='skeleton'><td colSpan={7}></td></tr>
+             </tbody> : "" 
+          }
           </table> 
           <Modal data={openModal} HideModal={Hidemodal}/>
             </Container>
             { /* <button className='default-btn' onClick={GoAsynchPage}>Go To AsyncThunk Example</button> */}
-            <Stack spacing={2} className='mt-2 pe-3' direction='row' justifyContent="flex-end">
+            {context ? '' : <Stack spacing={2} className='mt-2 pe-3' direction='row' justifyContent="flex-end">
               <Pagination page={currentPage} siblingCount={2} count={Math.ceil(userData.length/5)} onChange={handlePageChange} className='pagination'/>
-              </Stack> 
+              </Stack> }
              </>
              : <>  
           <form>

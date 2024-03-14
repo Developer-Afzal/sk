@@ -372,3 +372,19 @@ form select{
 .important-content{
     align-items: center;
 }
+
+.skeleton{
+    background-color: var(--lightYellow);
+    width: 100%;
+    animation-name: animate;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animate{
+    0% {background: linear-gradient(299deg, rgba(248,193,120,1) 100%, rgba(221,148,11,1) 100%);}
+   25%{background: linear-gradient(299deg, rgba(248,193,120,1) 90%, rgba(221,148,11,1) 100%);}
+   50%{background: linear-gradient(299deg, rgba(248,193,120,1) 70%, rgba(221,148,11,1) 100%); }
+   75%{background: linear-gradient(299deg, rgba(248,193,120,1) 20%, rgba(221,148,11,1) 100%);}
+   100%{background: linear-gradient(299deg, rgba(248,193,120,1) 100%, rgba(221,148,11,1) 100%);}
+}
