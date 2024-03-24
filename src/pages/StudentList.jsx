@@ -36,9 +36,11 @@ const StudentList = () => {
     
    
     useEffect(()=>{
-       setsearchData(userData.filter((itm)=>{
-       let  item =  itm.id 
-       return item.startsWith(context)}))       
+      if(context !=''){
+        setsearchData(userData.filter((itm)=>{
+          let  item =  itm.id 
+          return item.startsWith(context)})) 
+      }     
     },[context])
     
     const Added = (values)=>{
