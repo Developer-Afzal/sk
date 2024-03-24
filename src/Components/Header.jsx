@@ -29,7 +29,7 @@ const Header = ({srch}) => {
                <Link to="/sk" className='link'>S K Coaching Center</Link> 
             </Col>
             <Col sm={5} className='_flex d-none d-sm-flex'>
-              <input placeholder='Search Student' className='header-input' onChange={changeHandle} />
+              <input placeholder='Search Student by Roll No' className='header-input' onChange={changeHandle} />
             </Col>
             <Col xs={2} className='_flex d-none d-sm-flex'>
               Admin

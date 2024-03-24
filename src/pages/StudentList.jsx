@@ -36,7 +36,9 @@ const StudentList = () => {
     
    
     useEffect(()=>{
-       setsearchData(userData.filter((itm)=> itm.S_Name.toLowerCase() == context.toLowerCase()))       
+       setsearchData(userData.filter((itm)=>{
+       let  item =  itm.id 
+       return item.startsWith(context)}))       
     },[context])
     
     const Added = (values)=>{
@@ -169,7 +171,7 @@ const StudentList = () => {
                 </tr>
             </thead>
             <tbody>
-            {(context ? searchData : userData).slice(Startpage,EndPage).map((itm)=>
+            {(context ? searchData : userData)?.slice(Startpage,EndPage).map((itm)=>
                 <tr key={itm.id} >
                   <td>{itm.S_Name}</td>
                   <td className='text-center'>{itm.Date_of_Birth}</td>
