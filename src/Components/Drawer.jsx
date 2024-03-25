@@ -70,10 +70,13 @@ const LogoutUser = () => {
             </ListItemButton>
           </ListItem>
         ))}
-        <ListItemButton className='text-center' onClick={()=> LogoutUser()}>Logout</ListItemButton>
+        <ListItem> 
+        <ListItemButton onClick={()=> LogoutUser()}>
+        <ListItemText primary={'Logout'} sx={{paddingLeft:'40px'}} />
+        </ListItemButton>
+        </ListItem>
       </List>
       <Divider />
-     
     </Box>
   );
 

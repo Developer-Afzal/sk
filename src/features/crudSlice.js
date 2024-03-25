@@ -20,8 +20,9 @@ export const FetchPost = createAsyncThunk('fetch/post', async () =>{
     initialState,
     reducers:{
         Insert:(state, action)=>{
+            console.log(action.payload);
             let user = {
-              id:nanoid(),
+              id:action.payload.id,
               S_Name:action.payload.S_Name,
               S_Fname:action.payload.S_Fname,
               S_Mname:action.payload.S_Mname,
