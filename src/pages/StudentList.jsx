@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Container, Col, Row, Table } from 'react-bootstrap'
+import { Container, Col, Row} from 'react-bootstrap'
 import {Insert, Updation, Deletion, Read} from '../features/crudSlice'
 import {RemovefeeStatus} from '../features/StdfeeSlice'
 import { useNavigate, useOutletContext } from 'react-router-dom'
@@ -12,6 +12,7 @@ import EditIcon from '../Images/edit.png'
 import moreIcon from '../Images/moreIcon.png'
 import {useForm} from 'react-hook-form'
 import Modal from '../Components/Modal'
+import Snackbarcompo from '../Components/Snackbarcompo';
 
 
 const StudentList = () => {
@@ -27,26 +28,30 @@ const StudentList = () => {
     const [popOver, setpopOver] = useState(false);
     const [openModal, setopenModal] = useState(false)
     const [searchData, setsearchData] = useState(null)
-    const [loader, setloader] = useState(false)
     const userData = useSelector((state)=> state.crud.users);
     const Dispatch = useDispatch();
     const navigate = useNavigate()
+    const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
     // console.log(Math.ceil(userData.length/5));
     const context = useOutletContext();
     
    
     useEffect(()=>{
-       setsearchData(userData.filter((itm)=> itm.id == context))       
-    },[context])
+      setsearchData(userData.filter((itm)=> itm.id === context))   
+          },[context])
     
     const Added = (values)=>{
+      let std_Data = values;
       if(isEdit){
-        let std_Data = values;
         std_Data['id'] = UserId;
         std_Data['Status'] = 'UnPaid'
         Dispatch(Updation(std_Data))
+        openSnackBar({click:true,message:'Edited Successfully', mgss:'success' })
       }else{
+        std_Data['id'] = generateRandomNineDigitNumber();
+        std_Data['Status'] = 'UnPaid'
         Dispatch(Insert(values))
+        openSnackBar({click:true,message:'Added Successfully', mgss:'success' })
       }
         setShowForm(false)
         setStartPage(0);
@@ -84,6 +89,7 @@ const StudentList = () => {
       if(userData.slice(Startpage,EndPage).length === 1) {
           handlePageChange('', currentPage-1 )
         }
+        openSnackBar({click:true,message:'Deleted Successfully', mgss:'success' })
       }
     }
 
@@ -98,18 +104,15 @@ const StudentList = () => {
     Added(data)
   }
 
-    // const handleForm = (e)=>{
-    //   setStudent({
-    //     ...Student,
-    //     [e.target.name]:e.target.value
-    //   })
-    // }
 
-    // const resetForm = ()=>{
-    //   Object.keys(Student).forEach(element => {
-    //     Student[element] = '' 
-    //   });
-    // }
+  function generateRandomNineDigitNumber() {
+    let result = '';
+    for (let i = 0; i < 9; i++) {
+      result += Math.floor(Math.random() * 10); // Generate a random digit (0-9)
+    }
+    return result;
+  }
+
 
     const handlePageChange = (e,value)=>{ 
     setCurrentPage(value)
@@ -127,9 +130,14 @@ const StudentList = () => {
   }
 
 
-  const openActionlist = (value)=>{
-    setUserID(value)
-  }
+  const openSnackBar = (e)=>{
+    setsnackBar((prevState)=>({
+      ...prevState,
+      Click:e.click,
+      message:e.message,
+      msgType:e.mgss
+    }))
+   }
 
   const handlechanges =(e)=>{
 
@@ -184,8 +192,8 @@ const StudentList = () => {
                     <img className='icons' src={ViewIcon} onClick={()=>ViewUser(itm?.id)} alt="View"/>
                     <img className='icons' src={DeleteIcon} onClick={()=> Deletionvalue(itm?.id)} alt="delete"/>
                     </div>
-                    <span className={popOver && UserId == itm.id ? 'd-none' :  "info" }>
-                      <img className='icons' src={moreIcon} onClick={(e)=> Expandmenu(e,itm.id)}/>
+                    <span className={popOver && UserId === itm.id ? 'd-none' :  "info" }>
+                      <img className='icons' src={moreIcon} onClick={(e)=> Expandmenu(e,itm.id)} alt="Action"/>
                     </span>
                   </div>
                       <img className='icons d-none d-sm-inline' src={EditIcon} onClick={()=> EditForm(itm) } alt="edit"/>
@@ -211,9 +219,17 @@ const StudentList = () => {
             {context ? '' : <Stack spacing={2} className='mt-2 pe-3' direction='row' justifyContent="flex-end">
               <Pagination page={currentPage} siblingCount={2} count={Math.ceil(userData.length/5)} onChange={handlePageChange} className='pagination'/>
               </Stack> }
-             </>
-             : <>  
-          <form>
+           </>
+          :!ShowForm && context ? 
+          <tbody>
+             <tr className='skeleton'><td colSpan={7}></td></tr>
+             <tr className='skeleton'><td colSpan={7}></td></tr>
+             <tr className='skeleton'><td colSpan={7}></td></tr>
+             <tr className='skeleton'><td colSpan={7}></td></tr>
+             <tr className='skeleton'><td colSpan={7}></td></tr>
+             </tbody>  
+          : <>  
+            <form>
            <Container className='py-2'>
            <Row className='text-start'>
               <Col sm={4} className="p-1"><label>Student Name</label><input placeholder='Enter Student Name' name="S_Name" {...register('S_Name' ,{required:{value:true, message:'Please enter Name'}} ) }  autoComplete='off'/><p className='p-0 m-0 errorStyle'>{errors.S_Name?.message}</p></Col>
@@ -233,8 +249,9 @@ const StudentList = () => {
               <button className='default-btn' type='reset' onClick={()=> {  setShowForm(false); reset()  } }>Cancel</button></Col>
             </Row>
            </Container>
-          </form>
+            </form>
           </>}
+          <Snackbarcompo data={snackBar} openSnackBar={openSnackBar}/>
     </Container>
   )
 }
