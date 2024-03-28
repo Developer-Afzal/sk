@@ -37,8 +37,8 @@ const StudentList = () => {
     
    
     useEffect(()=>{
-      setsearchData(userData.filter((itm)=> itm.id === context))   
-          },[context])
+      setsearchData(userData.filter((itm)=> itm.id === context)) 
+      },[context])
     
     const Added = (values)=>{
       let std_Data = values;
@@ -167,11 +167,11 @@ const StudentList = () => {
             <table>
             <thead>
                 <tr>
+                  <th>Roll No</th>
                   <th>Student</th>
                   <th className='text-center'>DOB</th>
                   <th className='text-center'>Class</th>
                   <th className='text-center'>Board</th>
-                  <th className='text-center'>Address</th>
                   <th className='text-center'>Fee</th>
                   <th className='text-center'>Action</th>
                 </tr>
@@ -179,11 +179,11 @@ const StudentList = () => {
             <tbody>
             {(context ? searchData : userData)?.slice(Startpage,EndPage).map((itm)=>
                 <tr key={itm.id} >
+                  <td>{itm.id}</td>
                   <td>{itm.S_Name}</td>
                   <td className='text-center'>{itm.Date_of_Birth}</td>
                   <td className='text-center'>{itm.S_Class}</td>
                   <td className='text-center'>{itm.S_Board}</td>
-                  <td className='text-center'>{itm.Address}</td>
                   <td className='text-center'>{itm.Fee}</td>
                   <td className='text-center'>
                   <div className='popover d-sm-none _flex'>
@@ -240,7 +240,7 @@ const StudentList = () => {
               <Col sm={4} className="p-1"><label>Coaching Time</label><input placeholder='Coaching Time'  {...register('Coaching_Time',{required:{value:true, message:'Please enter Coaching Time'}} )}  name="Coaching_Time"/><p className='p-0 m-0 errorStyle'>{errors.Coaching_Time?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Parent's Contact Number</label><input placeholder="Parent's Contact Number" maxLength={10} {...register('P_Contact',{required:{value:true, message:'Please enter Contact'}} )}  name="P_Contact" onKeyDown={handlechanges} autoCapitalize='off'/><p className='p-0 m-0 errorStyle'>{errors.P_Contact?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Date of Birth</label><input type='text'  placeholder="dd/mm/yyyy"  onFocus={(e)=> { e.currentTarget.type = "date"; e.currentTarget.focus();}}  {...register('Date_of_Birth',{required:{value:true, message:'Please enter DOB'}} )} name="Date_of_Birth"/><p className='p-0 m-0 errorStyle'>{errors.Date_of_Birth?.message}</p></Col>
-              <Col sm={4} className="p-1"><label>Student Class</label><input placeholder="Enter Student Class"  {...register('S_Class',{required:{value:true, message:'Please enter Student Class'}} )} name="S_Class"/><p className='p-0 m-0 errorStyle'>{errors.S_Class?.message}</p></Col>
+              <Col sm={4} className="p-1"><label>Student Class</label><select {...register('S_Class',{required:{value:true, message:'Please enter Student Class'}} )} name="S_Class"><option value="">Select Class</option>Select Class<option value="IX">IX</option><option value="X">X</option><option value="XI">XI</option><option value="XII">XII</option></select><p className='p-0 m-0 errorStyle'>{errors.S_Class?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Medium</label><select  {...register('S_Board',{required:{value:true, message:'Please enter Board'}} )} name="S_Board"><option  value="">Select Board</option><option value="UP BOARD">UP BOARD</option><option value="ICSE">ICSE</option><option value="CBSE">CBSE</option></select><p className='p-0 m-0 errorStyle'>{errors.S_Board?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Coaching Fees</label><input placeholder='Fees'  {...register('Fee',{required:{value:true, message:'Please enter Fees Amt'}} )} name="Fee" onKeyDown={handlechanges} autoCapitalize='off'/><p className='p-0 m-0 errorStyle'>{errors.Fee?.message}</p></Col>
               <Col sm={4} className="p-1"><label>Date of Joining</label><input type='text'  placeholder="dd/mm/yyyy"  onFocus={(e)=> { e.currentTarget.type = "date"; e.currentTarget.focus();}}  {...register('joining_date',{required:{value:true, message:'Please enter DOB'}} )} name="joining_date"/><p className='p-0 m-0 errorStyle'>{errors.joining_date?.message}</p></Col>
