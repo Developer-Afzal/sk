@@ -46,7 +46,8 @@ const Feestatus = () => {
 
   const getfeeStatus = (value)=>{
     let singleData = FeeData[value].filter(itm => itm.id === userId?.userId )
-    if(singleData){
+    console.log(singleData);
+    if(singleData != ''){
       return 'paid'
     }
     
@@ -124,9 +125,9 @@ const Feestatus = () => {
          <table>
             <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>Roll No</th>
                   <th>Name</th>
-                  <th className='text-center'>date of Birth</th>
+                  <th className='text-center'>Date of Birth</th>
                   <th className='text-center'>Class</th>
                   <th className='text-center'>Board</th>
                   <th className='text-center'>Fee</th>
@@ -155,9 +156,7 @@ const Feestatus = () => {
     </Stack> </>:!openForm && userId?.userId ?  
     <Row className='p-0 m-2'>
       <Col sm={12} md={4} className='text-center'>
-       
           <img className='w-75' src="https://img.freepik.com/free-vector/smiling-boy-portrait-casual-clothing-cartoon-style-kid-avatar-happy-teenager-vector-character_90220-2150.jpg?w=740&t=st=1707826921~exp=1707827521~hmac=16bf803ad5c58224d308ea319511b317fda49fbe874035f5207b3eab16d68648"  />
-       
       </Col>
       <Col sm={8} className='_flex align-items-start'>
        <Col sm={6} className='ps-sm-5'>
@@ -194,7 +193,8 @@ const Feestatus = () => {
 
         </Col>
     </Row> : 
-    <Col className='position-relative'>
+    <Row className='p-0 m-2'>
+      <Col className='position-relative' sm={{span:8, offset:2}}>
       <form onSubmit={handleSubmit(handleform)}>
         <input placeholder='Enrollment No'  className='m-1' name='Enroll' {...register('Enroll')} disabled/>
         <input placeholder='Student Name' className='m-1' name="S_Name" {...register('S_Name')}/>
@@ -220,6 +220,7 @@ const Feestatus = () => {
         <button  className='default-btn' onClick={()=> setOpenForm(false)}>Cancel</button>
       </form>
     </Col>
+    </Row>
     }
       <Snackbarcompo data={snackBar} openSnackBar={openSnackBar}/>
   </Container>
