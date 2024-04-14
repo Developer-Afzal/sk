@@ -28,6 +28,8 @@ const StudentList = () => {
     const [popOver, setpopOver] = useState(false);
     const [openModal, setopenModal] = useState(false)
     const [searchData, setsearchData] = useState(null)
+    const [skeleton, setskeleton] = useState(false)
+    const [dataNotFound, setdataNotFound] = useState(false)
     const userData = useSelector((state)=> state.crud.users);
     const Dispatch = useDispatch();
     const navigate = useNavigate()
@@ -37,7 +39,15 @@ const StudentList = () => {
     
    
     useEffect(()=>{
+      setskeleton(true)
+      let Cleartimeout;
       setsearchData(userData.filter((itm)=> itm.id === context)) 
+      Cleartimeout = setTimeout(()=>{
+        setskeleton(false)
+      }, 2000)
+      return()=>{
+        clearTimeout(Cleartimeout)
+      }
       },[context])
     
     const Added = (values)=>{
@@ -177,7 +187,7 @@ const StudentList = () => {
                 </tr>
             </thead>
             <tbody>
-            {(context ? searchData : userData)?.slice(Startpage,EndPage).map((itm)=>
+            {!skeleton ? (context ? searchData : userData)?.slice(Startpage,EndPage).map((itm)=>
                 <tr key={itm.id} >
                   <td>{itm.id}</td>
                   <td>{itm.S_Name}</td>
@@ -201,16 +211,18 @@ const StudentList = () => {
                       <img className='icons d-none d-sm-inline' src={DeleteIcon} onClick={()=> Deletionvalue(itm?.id)} alt="delete"/>
                   </td>  
                 </tr>
-                )}
+                ):''}
             </tbody>
-           {context && searchData == '' ? 
+           {skeleton ? 
              <tbody>
              <tr className='skeleton'><td colSpan={7}></td></tr>
              <tr className='skeleton'><td colSpan={7}></td></tr>
              <tr className='skeleton'><td colSpan={7}></td></tr>
              <tr className='skeleton'><td colSpan={7}></td></tr>
              <tr className='skeleton'><td colSpan={7}></td></tr>
-             </tbody> : "" 
+             </tbody> :!skeleton && context && searchData?.length === 0 ?  <tbody>
+             <tr><td colSpan={7} className='text-center'> Data Not Found !</td></tr>
+             </tbody>:''
           }
           </table> 
           <Modal data={openModal} HideModal={Hidemodal}/>
@@ -220,16 +232,7 @@ const StudentList = () => {
               <Pagination page={currentPage} siblingCount={2} count={Math.ceil(userData.length/5)} onChange={handlePageChange} className='pagination'/>
               </Stack> }
            </>
-          :!ShowForm && context ? 
-          <tbody>
-             <tr className='skeleton'><td colSpan={7}></td></tr>
-             <tr className='skeleton'><td colSpan={7}></td></tr>
-             <tr className='skeleton'><td colSpan={7}></td></tr>
-             <tr className='skeleton'><td colSpan={7}></td></tr>
-             <tr className='skeleton'><td colSpan={7}></td></tr>
-             </tbody>  
-          : <>  
-            <form>
+          :  <form>
            <Container className='py-2'>
            <Row className='text-start'>
               <Col sm={4} className="p-1"><label>Student Name</label><input placeholder='Enter Student Name' name="S_Name" {...register('S_Name' ,{required:{value:true, message:'Please enter Name'}} ) }  autoComplete='off'/><p className='p-0 m-0 errorStyle'>{errors.S_Name?.message}</p></Col>
@@ -250,7 +253,7 @@ const StudentList = () => {
             </Row>
            </Container>
             </form>
-          </>}
+          }
           <Snackbarcompo data={snackBar} openSnackBar={openSnackBar}/>
     </Container>
   )
