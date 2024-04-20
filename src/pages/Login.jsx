@@ -12,10 +12,10 @@ const Login = () => {
   const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
   const navigate = useNavigate()
   const Dispath = useDispatch()
-//   const admin = {
-//     "email": "eve.holt@reqres.in",
-//     "password": "cityslicka"
-// }
+  const admin = {
+    "email": "eve.holt@reqres.in",
+    "password": "cityslicka"
+}
 
 const openSnackBar = (value)=>{
   setsnackBar((prevState)=>({
