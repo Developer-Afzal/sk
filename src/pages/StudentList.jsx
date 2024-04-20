@@ -36,7 +36,21 @@ const StudentList = () => {
     const [snackBar, setsnackBar] = React.useState({Click:false, message:'', msgType:''});
     // console.log(Math.ceil(userData.length/5));
     const context = useOutletContext();
+  
+    const Data = [
+      {id:"179380954", S_Name:"Abhishek", S_Fname:"Rakesh", S_Mname:"neelam", Address:"Sector E", Date_of_Birth:"2024-03-27",Pincode:"342342",Coaching_Time:"6:00 To 7:00", P_Contact:"8746237647",S_Class:"X", S_Board:"ICSE", Fee:"5500", joining_date:"2024-04-10", Status:"UnPaid"},
+      {id:"179380955", S_Name:"Vijay", S_Fname:"Rakesh", S_Mname:"Sarla", Address:"Sector E", Date_of_Birth:"2024-03-27",Pincode:"342342",Coaching_Time:"6:00 To 7:00", P_Contact:"8746237647",S_Class:"X", S_Board:"ICSE", Fee:"5500", joining_date:"2024-04-10", Status:"UnPaid"},
+      {id:"179380956", S_Name:"Anil", S_Fname:"Rakesh", S_Mname:"Anita Singh", Address:"Sector E", Date_of_Birth:"2024-03-27",Pincode:"342342",Coaching_Time:"6:00 To 7:00", P_Contact:"8746237647",S_Class:"X", S_Board:"ICSE", Fee:"5500", joining_date:"2024-04-10", Status:"UnPaid"}
+    ]
+  
+
+    useEffect(()=>{
+      if(userData.length === 0){
+        for(let i of Data)
+        Dispatch(Insert(i))
+      }
     
+    },[])
    
     useEffect(()=>{
       setskeleton(true)
